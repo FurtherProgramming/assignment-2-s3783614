@@ -1,5 +1,6 @@
-package main;
+package Model;
 
+import main.SQLConnection;
 import org.sqlite.SQLiteConnection;
 
 import java.sql.Connection;
@@ -30,7 +31,7 @@ public class LoginModel {
 
     public Boolean isLogin(String user, String pass) throws SQLException {
         PreparedStatement preparedStatement = null;
-        ResultSet resultSet=null;
+        ResultSet resultSet = null;
         String query = "SELECT * FROM employee WHERE username = ? AND password= ?";
         try {
 

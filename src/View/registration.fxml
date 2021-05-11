@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="btnRegister" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="559.0" prefWidth="517.0"
+            xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.RegistrationController">
+   <children>
+      <Label alignment="TOP_CENTER" layoutX="114.0" layoutY="88.0" prefHeight="17.0" prefWidth="289.0" text="Registration" textAlignment="CENTER">
+         <font>
+            <Font name="Arial Black" size="24.0" />
+         </font>
+      </Label>
+      <Button layoutX="197.0" layoutY="491.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="86.0" text="Register" />
+      <Label alignment="CENTER" layoutX="57.0" layoutY="166.0" prefHeight="17.0" prefWidth="149.0" text="First Name" textAlignment="CENTER" />
+      <TextField fx:id="txtFirstName" layoutX="57.0" layoutY="191.0" />
+      <Label alignment="CENTER" layoutX="274.0" layoutY="166.0" prefHeight="17.0" prefWidth="149.0" text="Last Name" textAlignment="CENTER" />
+      <TextField fx:id="txtSecondName" layoutX="274.0" layoutY="191.0" />
+      <Label alignment="CENTER" layoutX="57.0" layoutY="259.0" prefHeight="17.0" prefWidth="149.0" text="Username" textAlignment="CENTER" />
+      <TextField fx:id="txtRegoUsername" layoutX="57.0" layoutY="284.0" />
+      <Label alignment="CENTER" layoutX="274.0" layoutY="259.0" prefHeight="17.0" prefWidth="149.0" text="Password" textAlignment="CENTER" />
+      <PasswordField fx:id="txtRegoPassword" layoutX="274.0" layoutY="284.0" />
+      <Label layoutX="59.0" layoutY="392.0" prefHeight="17.0" prefWidth="112.0" text="Secret Question Answer" />
+      <TextField layoutX="59.0" layoutY="417.0" prefHeight="31.0" prefWidth="398.0" />
+      <Label layoutX="59.0" layoutY="329.0" prefHeight="17.0" prefWidth="112.0" text="Secret Question" />
+      <MenuButton layoutX="59.0" layoutY="354.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="398.0" text="MenuButton">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Action 1" />
+          <MenuItem mnemonicParsing="false" text="Action 2" />
+        </items>
+      </MenuButton>
+   </children>
+</AnchorPane>
