@@ -99,11 +99,11 @@ public class LoginController implements Initializable {
         //     e.printStackTrace();
         // }
 
-        Parent root = null;
+         // ;
         try {
 
                 Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-                root = FXMLLoader.load(getClass().getResource("../View/registration.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("../View/registration.fxml"));
                 Scene menuPageScene = new Scene(root);
                 stage.setScene(menuPageScene);
                 stage.show();
