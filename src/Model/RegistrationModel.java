@@ -54,21 +54,35 @@ public class RegistrationModel {
         PreparedStatement preparedStatement= null;
         ResultSet resultSet = null;
         String query = "SELECT * FROM Employee WHERE username = ?";
+        boolean doesExist = false;
+
 
         try
         {
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, username);
             resultSet = preparedStatement.executeQuery();
-            return resultSet.next();
+            // System.out.println(resultSet.next());
+            // return resultSet.next();
+            String usernameCheck;
+            if(resultSet.next())
+            {
+                usernameCheck = resultSet.getString("username");
+                if(usernameCheck.equals(username))
+                {
+                    doesExist = true;
+                }
+            }
+
+
         }
         catch(SQLException e)
         {
             e.printStackTrace();
-            return false;
+
         }
-
-
+        System.out.println(doesExist);
+        return doesExist;
     }
 
 

@@ -27,5 +27,6 @@
       <Button layoutX="279.0" layoutY="575.0" mnemonicParsing="false" onAction="#userRegistration" text="Register" />
       <PasswordField fx:id="txtRegoPassword" layoutX="353.0" layoutY="317.0" />
       <PasswordField fx:id="txtSecretAnswer" layoutX="120.0" layoutY="514.0" prefHeight="31.0" prefWidth="382.0" />
+      <Label fx:id="lblStatus" layoutX="148.0" layoutY="617.0" prefHeight="21.0" prefWidth="419.0" />
    </children>
 </AnchorPane>

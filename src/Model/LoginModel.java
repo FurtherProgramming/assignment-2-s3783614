@@ -46,8 +46,10 @@ public class LoginModel {
         {
             return false;
         }finally {
-           preparedStatement.close();
-           resultSet.close();
+            assert preparedStatement != null;
+            preparedStatement.close();
+            assert resultSet != null;
+            resultSet.close();
         }
 
     }

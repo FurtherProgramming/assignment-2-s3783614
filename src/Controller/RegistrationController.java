@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class RegistrationController implements Initializable
@@ -34,6 +35,8 @@ public class RegistrationController implements Initializable
     private TextField txtRegoPassword;
     @FXML
     private TextField txtSecretAnswer;
+    @FXML
+    private Label lblStatus;
 
 
 
@@ -56,20 +59,23 @@ public class RegistrationController implements Initializable
 
 
         try {
-
-            if(registrationModel.isRegistered(firstName, secondName, username,
-                    password, secretQuestion, secretAnswer))
-            {
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                Parent root = FXMLLoader.load(getClass().getResource("../View/employeeDashboard.fxml"));
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
+            if(!registrationModel.usernameExists(username)) {
+                System.out.println(!registrationModel.usernameExists(username));
+                if (registrationModel.isRegistered(firstName, secondName, username,
+                        password, secretQuestion, secretAnswer)) {
+                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    Parent root = FXMLLoader.load(getClass().getResource("../View/loginPage.fxml"));
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+                } else {
+                    System.out.println("Ur cooked");
+                    System.exit(1);
+                }
             }
             else
             {
-                System.out.println("Ur cooked");
-                System.exit(1);
+                lblStatus.setText("This username has already been taken, try again!");
             }
         }
         catch (IOException e) {
