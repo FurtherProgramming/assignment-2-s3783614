@@ -36,9 +36,7 @@ public class RegistrationController implements Initializable
     private TextField txtSecretAnswer;
 
 
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources)
@@ -58,11 +56,12 @@ public class RegistrationController implements Initializable
 
 
         try {
+
             if(registrationModel.isRegistered(firstName, secondName, username,
                     password, secretQuestion, secretAnswer))
             {
-                stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-                root = FXMLLoader.load(getClass().getResource("../View/employeeDashboard.fxml"));
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                Parent root = FXMLLoader.load(getClass().getResource("../View/employeeDashboard.fxml"));
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();
@@ -76,6 +75,14 @@ public class RegistrationController implements Initializable
         catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void previousPage(ActionEvent event) throws IOException {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("../View/loginPage.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
 

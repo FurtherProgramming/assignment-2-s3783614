@@ -84,28 +84,15 @@ public class LoginController implements Initializable {
 
     public void registration(ActionEvent event)
     {
-        // try{
-        //
-        //     FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/registration.fxml"));
-        //     root = loader.load();
-        //     // isConnected.setText("Registration Time!");
-        //     stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        //     scene = new Scene(root);
-        //     stage.setScene(scene);
-        //     stage.show();
-        // }
-        // catch(IOException e)
-        // {
-        //     e.printStackTrace();
-        // }
 
-         // ;
         try {
 
                 Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-                Parent root = FXMLLoader.load(getClass().getResource("../View/registration.fxml"));
-                Scene menuPageScene = new Scene(root);
-                stage.setScene(menuPageScene);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/registration.fxml"));
+                Parent root = loader.load();
+                // Parent root = FXMLLoader.load(getClass().getResource("../View/registration.fxml"));
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
                 stage.show();
 
         } catch ( IOException e) {
@@ -117,15 +104,13 @@ public class LoginController implements Initializable {
     public void forgotPassword(ActionEvent event) {
         Parent root = null;
         try {
-            // if (loginModel.isLogin(txtUsername.getText(),txtPassword.getText())){
+
                 Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
                 root = FXMLLoader.load(getClass().getResource("../View/forgotPassword.fxml"));
-                Scene menuPageScene = new Scene(root);
-                stage.setScene(menuPageScene);
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
                 stage.show();
-            // }else{
-            //     isConnected.setText("username and password is incorrect");
-            // }
+
         } catch (IOException e) {
             e.printStackTrace();
         }

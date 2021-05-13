@@ -32,7 +32,7 @@ public class LoginModel {
     public Boolean isLogin(String user, String pass) throws SQLException {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        String query = "SELECT * FROM employee WHERE username = ? AND password= ?";
+        String query = "SELECT * FROM Employee WHERE username = ? AND password= ?";
         try {
 
             preparedStatement = connection.prepareStatement(query);
@@ -40,12 +40,7 @@ public class LoginModel {
             preparedStatement.setString(2, pass);
 
             resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                return true;
-            }
-            else{
-                return false;
-            }
+            return resultSet.next();
         }
         catch (Exception e)
         {
