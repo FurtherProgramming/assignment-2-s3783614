@@ -2,6 +2,8 @@ package Controller;
 
 import Model.RegistrationModel;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -23,8 +26,8 @@ public class RegistrationController implements Initializable
 {
     RegistrationModel registrationModel = new RegistrationModel();
 
-    @FXML
-    private Label isConnected;
+    // @FXML
+    // private Label isConnected;
     @FXML
     private TextField txtFirstName;
     @FXML
@@ -37,14 +40,22 @@ public class RegistrationController implements Initializable
     private TextField txtSecretAnswer;
     @FXML
     private Label lblStatus;
+    @FXML
+    private ComboBox<String> cboSecretQuestion;
 
-
-
+    ObservableList<String> qList = FXCollections.observableArrayList("What was your first pet?",
+                                                                            "What city did your parents meet?",
+                                                                            "What was your first job?",
+                                                                            "Whats your oldest child's name?",
+                                                                            "What was your first movie you watched?",
+                                                                            "What was childhood nickname?",
+                                                                            "Where is your favourite place to eat food?");
 
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
-        // isConnected.setText("Registration Time!");
+
+        cboSecretQuestion.setItems(qList);
     }
 
 
@@ -55,7 +66,7 @@ public class RegistrationController implements Initializable
         String username = txtRegoUsername.getText();
         String password = txtRegoPassword.getText();
         String secretAnswer = txtSecretAnswer.getText();
-        int secretQuestion = 2;
+        String secretQuestion = cboSecretQuestion.getValue();
 
 
         try {

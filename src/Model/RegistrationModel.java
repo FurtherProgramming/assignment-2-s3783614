@@ -16,7 +16,7 @@ public class RegistrationModel {
     }
 
     public boolean isRegistered(String firstName, String lastName, String  username,
-                                String password, int secretQuestion, String secretAnswer)
+                                String password, String secretQuestion, String secretAnswer)
     {
 
         // System.out.println("spot 1");
@@ -32,7 +32,7 @@ public class RegistrationModel {
 
             preparedStatement.setString(3,username);
             preparedStatement.setString(4,password);
-            preparedStatement.setInt(5,secretQuestion);
+            preparedStatement.setString(5,secretQuestion);
             preparedStatement.setString(6,secretAnswer);
 
             preparedStatement.executeUpdate();
