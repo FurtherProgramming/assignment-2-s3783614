@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
@@ -37,9 +38,17 @@ public class RegistrationController implements Initializable
     @FXML
     private TextField txtRegoPassword;
     @FXML
+    private TextField txtRegoConfirmPassword;
+    @FXML
     private TextField txtSecretAnswer;
     @FXML
+    private TextField txtConfirmSecretAnswer;
+    @FXML
     private Label lblStatus;
+    @FXML
+    private Label lblPasswordStatus;
+    @FXML
+    private Label lblSecretPassStatus;
     @FXML
     private ComboBox<String> cboSecretQuestion;
 
@@ -65,28 +74,44 @@ public class RegistrationController implements Initializable
         String secondName = txtSecondName.getText();
         String username = txtRegoUsername.getText();
         String password = txtRegoPassword.getText();
+        String confirmPassword = txtRegoConfirmPassword.getText();
         String secretAnswer = txtSecretAnswer.getText();
+        String confirmSecretAnswer = txtConfirmSecretAnswer.getText();
         String secretQuestion = cboSecretQuestion.getValue();
 
 
         try {
-            if(!registrationModel.usernameExists(username)) {
-                System.out.println(!registrationModel.usernameExists(username));
-                if (registrationModel.isRegistered(firstName, secondName, username,
-                        password, secretQuestion, secretAnswer)) {
-                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                    Parent root = FXMLLoader.load(getClass().getResource("../View/loginPage.fxml"));
-                    Scene scene = new Scene(root);
-                    stage.setScene(scene);
-                    stage.show();
-                } else {
-                    System.out.println("Ur cooked");
-                    System.exit(1);
+            if(password.equals(confirmPassword)) {
+                if(secretAnswer.equals(confirmSecretAnswer)) {
+                    if (!registrationModel.usernameExists(username)) {
+
+                        System.out.println(!registrationModel.usernameExists(username));
+                        if (registrationModel.isRegistered(firstName, secondName, username,
+                                password, secretQuestion, secretAnswer)) {
+                            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                            Parent root = FXMLLoader.load(getClass().getResource("../View/loginPage.fxml"));
+                            Scene scene = new Scene(root);
+                            stage.setScene(scene);
+                            stage.show();
+                        } else {
+                            System.out.println("Ur cooked");
+                            System.exit(1);
+                        }
+                    } else {
+
+                        lblStatus.setText("This username has already been taken, try again!");
+                    }
+                }
+                else
+                {
+                    lblSecretPassStatus.setText(String.valueOf(Color.RED));
+                    lblSecretPassStatus.setText("Passwords do not match!, try again!");
                 }
             }
             else
             {
-                lblStatus.setText("This username has already been taken, try again!");
+                lblPasswordStatus.setText(String.valueOf(Color.RED));
+                lblPasswordStatus.setText("Passwords do not match!, try again!");
             }
         }
         catch (IOException e) {
