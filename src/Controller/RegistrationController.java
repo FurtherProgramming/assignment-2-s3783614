@@ -27,8 +27,6 @@ public class RegistrationController implements Initializable
 {
     RegistrationModel registrationModel = new RegistrationModel();
 
-    // @FXML
-    // private Label isConnected;
     @FXML
     private TextField txtFirstName;
     @FXML

@@ -27,4 +27,7 @@ public class ForgotPasswordController implements Initializable
         stage.setScene(scene);
         stage.show();
     }
+
+
+    //TODO: Create and follow singleton
 }
