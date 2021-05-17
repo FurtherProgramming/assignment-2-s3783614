@@ -79,23 +79,31 @@ public class RegistrationController implements Initializable
 
 
         try {
-            if(password.equals(confirmPassword)) {
-                if(secretAnswer.equals(confirmSecretAnswer)) {
-                    if (!registrationModel.usernameExists(username)) {
+            if(password.equals(confirmPassword))
+            {
+                if(secretAnswer.equals(confirmSecretAnswer))
+                {
+                    if (!registrationModel.usernameExists(username))
+                    {
 
                         System.out.println(!registrationModel.usernameExists(username));
                         if (registrationModel.isRegistered(firstName, secondName, username,
-                                password, secretQuestion, secretAnswer)) {
+                                password, secretQuestion, secretAnswer))
+                        {
                             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                             Parent root = FXMLLoader.load(getClass().getResource("../View/loginPage.fxml"));
                             Scene scene = new Scene(root);
                             stage.setScene(scene);
                             stage.show();
-                        } else {
+                        }
+                        else
+                        {
                             System.out.println("Ur cooked");
                             System.exit(1);
                         }
-                    } else {
+                    }
+                    else
+                    {
 
                         lblStatus.setText("This username has already been taken, try again!");
                     }
