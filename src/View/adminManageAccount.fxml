@@ -14,8 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="659.0" prefWidth="607.0"
-            xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.RegistrationController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="659.0" prefWidth="607.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AdminManageAccController">
    <top>
       <GridPane alignment="CENTER" prefHeight="65.0" prefWidth="607.0" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -27,7 +26,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label prefHeight="35.0" prefWidth="108.0" text="Register" textAlignment="CENTER" GridPane.columnIndex="1">
+            <Label alignment="CENTER" prefHeight="35.0" prefWidth="345.0" text="Update Account Details" textAlignment="CENTER" GridPane.columnIndex="1">
                <font>
                   <Font name="Calibri" size="30.0" />
                </font>
@@ -48,7 +47,7 @@
    <bottom>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btnRegister" mnemonicParsing="false" onAction="#userRegistration" prefHeight="39.0" prefWidth="84.0" text="Register" />
+            <Button fx:id="btnRegister" mnemonicParsing="false" prefHeight="39.0" prefWidth="84.0" text="Update" />
          </children>
       </HBox>
    </bottom>

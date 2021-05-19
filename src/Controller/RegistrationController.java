@@ -104,19 +104,19 @@ public class RegistrationController implements Initializable
                     }
                     else
                     {
-
+                        lblStatus.setTextFill(Color.RED);
                         lblStatus.setText("This username has already been taken, try again!");
                     }
                 }
                 else
                 {
-                    lblSecretPassStatus.setText(String.valueOf(Color.RED));
+                    lblSecretPassStatus.setTextFill(Color.RED);
                     lblSecretPassStatus.setText("Passwords do not match!, try again!");
                 }
             }
             else
             {
-                lblPasswordStatus.setText(String.valueOf(Color.RED));
+                lblPasswordStatus.setTextFill(Color.RED);
                 lblPasswordStatus.setText("Passwords do not match!, try again!");
             }
         }

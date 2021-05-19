@@ -14,6 +14,10 @@ public class UserHolder
         return INSTANCE;
     }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public User getUser() {
         return user;
     }

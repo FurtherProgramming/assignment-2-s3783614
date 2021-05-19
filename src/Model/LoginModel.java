@@ -29,15 +29,16 @@ public class LoginModel {
         }
     }
 
-    public Boolean isLogin(String user, String pass) throws SQLException {
+    public Boolean isLogin(String user, String pass, String role) throws SQLException {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        String query = "SELECT * FROM Employee WHERE username = ? AND password= ?";
+        String query = "SELECT * FROM Employee WHERE username = ? AND password= ? AND role = ?;";
         try {
 
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, user);
             preparedStatement.setString(2, pass);
+            preparedStatement.setString(3, role);
 
             resultSet = preparedStatement.executeQuery();
             return resultSet.next();
@@ -53,5 +54,32 @@ public class LoginModel {
         }
 
     }
+
+    // public boolean isAdmin(String status) throws SQLException
+    // {
+    //     PreparedStatement preparedStatement = null;
+    //     ResultSet resultSet = null;
+    //     String query = "SELECT * FROM Employee WHERE role = ?;";
+    //     try {
+    //
+    //         preparedStatement = connection.prepareStatement(query);
+    //         preparedStatement.setString(1, status);
+    //
+    //         resultSet = preparedStatement.executeQuery();
+    //         return resultSet.next();
+    //
+    //     }
+    //     catch (Exception e)
+    //     {
+    //         return false;
+    //     }finally {
+    //         assert preparedStatement != null;
+    //         preparedStatement.close();
+    //         assert resultSet != null;
+    //         resultSet.close();
+    //     }
+    // }
+
+
 
 }

@@ -69,9 +69,18 @@ public class LoginController implements Initializable {
         Parent root = null;
         try
         {
-            if (loginModel.isLogin(txtUsername.getText(),txtPassword.getText())){
+            if (loginModel.isLogin(txtUsername.getText(),txtPassword.getText(), "User"))
+            {
                 Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
                 root = FXMLLoader.load(getClass().getResource("../View/employeeDashboard.fxml"));
+                Scene menuPageScene = new Scene(root);
+                stage.setScene(menuPageScene);
+                stage.show();
+            }
+            else if(loginModel.isLogin(txtUsername.getText(),txtPassword.getText(), "Admin"))
+            {
+                Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                root = FXMLLoader.load(getClass().getResource("../View/AdminDashboard.fxml"));
                 Scene menuPageScene = new Scene(root);
                 stage.setScene(menuPageScene);
                 stage.show();
