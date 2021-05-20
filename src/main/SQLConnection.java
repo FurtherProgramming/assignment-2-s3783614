@@ -16,4 +16,11 @@ public class SQLConnection {
             return null;
         }
     }
+
+    // public static Connection getConnection()
+    // {
+    //     return instance
+    // }
+
+
 }

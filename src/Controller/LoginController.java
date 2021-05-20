@@ -12,7 +12,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import javafx.event.ActionEvent;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import main.User;
+import main.UserHolder;
 
 import java.io.IOException;
 import java.net.URL;
@@ -20,6 +23,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
+    User user = new User();
 
     public LoginModel loginModel = new LoginModel();
     @FXML
@@ -65,6 +69,11 @@ public class LoginController implements Initializable {
         // } catch (SQLException e) {
         //     e.printStackTrace();
         // }
+        String username = txtUsername.getText();
+        String password = txtUsername.getText();
+
+
+
 
         Parent root = null;
         try
@@ -73,6 +82,10 @@ public class LoginController implements Initializable {
             {
                 Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
                 root = FXMLLoader.load(getClass().getResource("../View/employeeDashboard.fxml"));
+
+                loginModel.retriveInfo(username);
+                // System.out.println();
+
                 Scene menuPageScene = new Scene(root);
                 stage.setScene(menuPageScene);
                 stage.show();
@@ -80,6 +93,9 @@ public class LoginController implements Initializable {
             else if(loginModel.isLogin(txtUsername.getText(),txtPassword.getText(), "Admin"))
             {
                 Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                // UserH
+                loginModel.retriveInfo(username);
+
                 root = FXMLLoader.load(getClass().getResource("../View/AdminDashboard.fxml"));
                 Scene menuPageScene = new Scene(root);
                 stage.setScene(menuPageScene);
@@ -87,6 +103,7 @@ public class LoginController implements Initializable {
             }
             else
             {
+                isConnected.setTextFill(Color.RED);
                 isConnected.setText("username and password is incorrect");
             }
         } catch (SQLException | IOException e) {

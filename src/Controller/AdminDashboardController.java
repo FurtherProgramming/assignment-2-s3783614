@@ -10,7 +10,10 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import main.User;
+import main.UserHolder;
 
 import java.io.IOException;
 import java.net.URL;
@@ -18,10 +21,18 @@ import java.util.ResourceBundle;
 
 public class AdminDashboardController implements Initializable
 {
+    User user = new User();
+
+    @FXML
+    private Label lblWelcome;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        UserHolder holder = UserHolder.getInstance();
+        user = holder.getUser();
+        // System.out.println(user.getUserName());
+        String name = user.getSecQuestion();
+        lblWelcome.setText(name);
     }
 
     public void previousPage(ActionEvent event) throws IOException {
