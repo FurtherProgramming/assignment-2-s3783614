@@ -22,14 +22,14 @@ public class RegistrationModel {
         // System.out.println("spot 1");
 
         String queryString;
-        queryString = "INSERT INTO Employee(first_name, last_name, username, password, secret_question, secret_answer) VALUES(?,?,?,?,?,?)";
+        queryString = "INSERT INTO Employee(first_name, last_name, username, password, secret_question, secret_answer)" +
+                                                                                                " VALUES(?,?,?,?,?,?)";
 
         try(PreparedStatement preparedStatement = connection.prepareStatement(queryString))
         {
             System.out.println(preparedStatement);
             preparedStatement.setString(1, firstName);
             preparedStatement.setString(2, lastName);
-
             preparedStatement.setString(3,username);
             preparedStatement.setString(4,password);
             preparedStatement.setString(5,secretQuestion);

@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.ForgotPasswordModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -12,44 +13,53 @@ import main.Util;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class ForgotPasswordP2Controller implements Initializable
-{
+public class ForgotPasswordP3Controller implements Initializable {
+
     User user = new User();
+    ForgotPasswordModel fpmodel = new ForgotPasswordModel();
 
     @FXML
-    private Label lblSecretQ;
+    private Label lblChecker;
     @FXML
-    private Label lblStatus;
+    private Label lblWelcomeUser;
     @FXML
-    private TextField txtAnswer;
+    private TextField txtNewPass;
+    @FXML
+    private TextField txtConfirmNewPass;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         UserHolder holder = UserHolder.getInstance();
         user = holder.getUser();
-        String secretQuestion = user.getSecQuestion();
-        System.out.println(secretQuestion);
-        System.out.println(user.getSecAnswer());
-        lblSecretQ.setText(secretQuestion);
-        lblStatus.setText("");
+        String name = user.getfName();
+        lblWelcomeUser.setText("Hello " +
+                name.substring(0,1).toUpperCase() + name.substring(1).toLowerCase());
+        lblChecker.setText("");
     }
 
-    public void correctAnswer(ActionEvent event) throws IOException {
+    public void changePassword(ActionEvent event) throws IOException {
         UserHolder holder = UserHolder.getInstance();
         user = holder.getUser();
 
-        String userInput = txtAnswer.getText();
-        String storedAnswer = user.getSecAnswer();
-        if(userInput.equals(storedAnswer))
+        String newPassword = txtNewPass.getText();
+        String confirmNewPassword = txtConfirmNewPass.getText();
+        String username = user.getUserName();
+        if(newPassword.equals(confirmNewPassword))
         {
-            Util.sceneSwitcher("../View/forgotPasswordP3.fxml", Util.getStage(event));
+            try {
+                fpmodel.changePassword(newPassword,username);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            Util.sceneSwitcher("../View/loginPage.fxml",Util.getStage(event));
         }
         else
         {
-            lblStatus.setTextFill(Color.RED);
-            lblStatus.setText("Incorrect Answer!");
+            lblChecker.setTextFill(Color.RED);
+            lblChecker.setText("Passwords Do Not Match!");
         }
     }
 
@@ -59,9 +69,7 @@ public class ForgotPasswordP2Controller implements Initializable
         // Scene scene = new Scene(root);
         // stage.setScene(scene);
         // stage.show();
-        //GO BACK HOME ALWAYS
         Util.sceneSwitcher("../View/loginPage.fxml", Util.getStage(event));
-
     }
 
 }

@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
+import main.Util;
 
 import java.io.IOException;
 import java.net.URL;
@@ -22,26 +23,28 @@ public class AdminManageAccController implements Initializable
     @FXML
     private ComboBox<String> cboSecretQuestion;
 
-    ObservableList<String> qList = FXCollections.observableArrayList("What was your first pet?",
-            "What city did your parents meet?",
-            "What was your first job?",
-            "Whats your oldest child's name?",
-            "What was your first movie you watched?",
-            "What was childhood nickname?",
-            "Where is your favourite place to eat food?");
+    // ObservableList<String> qList = FXCollections.observableArrayList("What was your first pet?",
+    //         "What city did your parents meet?",
+    //         "What was your first job?",
+    //         "Whats your oldest child's name?",
+    //         "What was your first movie you watched?",
+    //         "What was childhood nickname?",
+    //         "Where is your favourite place to eat food?");
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        cboSecretQuestion.setItems(qList);
+        // cboSecretQuestion.setItems(qList);
     }
 
 
     public void previousPage(ActionEvent event) throws IOException {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("../View/adminDashboard.fxml"));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        // Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        // Parent root = FXMLLoader.load(getClass().getResource("../View/adminDashboard.fxml"));
+        // Scene scene = new Scene(root);
+        // stage.setScene(scene);
+        // stage.show();
+
+        Util.sceneSwitcher("../View/adminDashboard.fxml", Util.getStage(event));
     }
 
 }
