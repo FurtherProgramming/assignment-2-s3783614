@@ -31,8 +31,10 @@ public class AdminDashboardController implements Initializable
     public void initialize(URL location, ResourceBundle resources) {
         UserHolder holder = UserHolder.getInstance();
         user = holder.getUser();
-        String name = user.getUserName();
-        lblWelcome.setText(name);
+        String name = user.getfName();
+        // lblWelcome.setText(name);
+        lblWelcome.setText("Hello " +
+                name.substring(0,1).toUpperCase() + name.substring(1).toLowerCase());
     }
 
     public void previousPage(ActionEvent event) throws IOException {

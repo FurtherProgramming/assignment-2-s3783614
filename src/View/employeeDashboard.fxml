@@ -11,9 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="406.0" prefWidth="600.0"
-            xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.EmployeeDashboardController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="445.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.EmployeeDashboardController">
    <top>
       <GridPane alignment="CENTER" prefHeight="70.0" prefWidth="600.0" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -49,12 +47,20 @@
       </GridPane>
    </top>
    <center>
-      <VBox alignment="CENTER" prefHeight="328.0" prefWidth="600.0" spacing="30.0" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefHeight="354.0" prefWidth="600.0" spacing="30.0" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Hello: What would you like to do today?" />
+            <Label fx:id="lblWelcomeUser" text="Hello: ">
+               <font>
+                  <Font size="25.0" />
+               </font></Label>
+            <Label text="What Would you like to do today">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
             <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Make a Booking" textAlignment="CENTER" />
             <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Delete a Booking" textAlignment="CENTER" />
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Manage Account" textAlignment="CENTER" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#manageAccount" prefHeight="50.0" prefWidth="150.0" text="Manage Account" textAlignment="CENTER" />
          </children>
       </VBox>
    </center>
