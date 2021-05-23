@@ -35,7 +35,7 @@ public class EmployeeDashboardController implements Initializable
 
     public void manageAccount(ActionEvent event) throws IOException
     {
-        Util.sceneSwitcher("../View/employeeManageAccount.fxml", Util.getStage(event));
+        Util.sceneSwitcher("../View/secretQuestionPage.fxml", Util.getStage(event));
     }
 
     public void previousPage(ActionEvent event) throws IOException

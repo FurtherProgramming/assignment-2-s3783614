@@ -30,8 +30,10 @@ public class ForgotPasswordP2Controller implements Initializable
         UserHolder holder = UserHolder.getInstance();
         user = holder.getUser();
         String secretQuestion = user.getSecQuestion();
+
         System.out.println(secretQuestion);
         System.out.println(user.getSecAnswer());
+
         lblSecretQ.setText(secretQuestion);
         lblStatus.setText("");
     }

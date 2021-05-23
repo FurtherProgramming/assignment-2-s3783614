@@ -49,11 +49,15 @@ public class ForgotPasswordController implements Initializable
             // stage.show();
             // loginModel.retrieveInfo(username);
             // Util.sceneSwitcher("../View/forgotPasswordP2.fxml", Util.getStage(event));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Parent root = FXMLLoader.load(getClass().getResource("../View/forgotPasswordP2.fxml"));
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+
+
+            // Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            // Parent root = FXMLLoader.load(getClass().getResource("../View/forgotPasswordP2.fxml"));
+            // Scene scene = new Scene(root);
+            // stage.setScene(scene);
+            // stage.show();
+
+            Util.sceneSwitcher("../View/forgotPasswordP2.fxml", Util.getStage(event));
 
         }
         else

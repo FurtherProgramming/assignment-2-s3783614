@@ -68,7 +68,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="270.0" text="Update Personal Details" />
+                  <Button mnemonicParsing="false" onAction="#personalDetails" prefHeight="40.0" prefWidth="270.0" text="Update Personal Details" />
                   <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="270.0" text="Update Password" />
                   <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="270.0" text="Update Secret Question and Answer" />
                </children>

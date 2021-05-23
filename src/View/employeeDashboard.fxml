@@ -47,7 +47,7 @@
       </GridPane>
    </top>
    <center>
-      <VBox alignment="CENTER" prefHeight="354.0" prefWidth="600.0" spacing="30.0" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefHeight="354.0" prefWidth="600.0" spacing="15.0" BorderPane.alignment="CENTER">
          <children>
             <Label fx:id="lblWelcomeUser" text="Hello: ">
                <font>

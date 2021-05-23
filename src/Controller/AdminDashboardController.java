@@ -65,7 +65,7 @@ public class AdminDashboardController implements Initializable
         // stage.setScene(scene);
         // stage.show();
 
-        Util.sceneSwitcher("../View/adminManageAccount.fxml", Util.getStage(event));
+        Util.sceneSwitcher("../View/secretQuestionPage.fxml", Util.getStage(event));
 
     }
 

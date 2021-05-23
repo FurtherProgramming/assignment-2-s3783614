@@ -29,6 +29,12 @@ public class EmployeeManageAccount implements Initializable {
                 name.substring(0,1).toUpperCase() + name.substring(1).toLowerCase());
     }
 
+    public void personalDetails(ActionEvent event) throws IOException
+    {
+        Util.sceneSwitcher("../View/employeeManagePersonalDetails.fxml", Util.getStage(event));
+
+    }
+
     public void previousPage(ActionEvent event) throws IOException
     {
         Util.sceneSwitcher("../View/employeeDashboard.fxml", Util.getStage(event));
