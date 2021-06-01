@@ -9,7 +9,6 @@ private static Connection connection;
         try{
           // Class.forName("org.sqlite.JDBC");
           //   return DriverManager.getConnection("jdbc:sqlite:assignment.db");
-
           if(connection == null)
           {
               Class.forName("org.sqlite.JDBC");

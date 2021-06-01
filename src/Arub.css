@@ -1,8 +1,8 @@
 .root
 {
-    -fx-background-color: #ECD444;
+    -fx-background-color: #CFCBCA;
     -fx-font-family: Calibri;
-    -fx-text-fill: #1C1C1C;
+    -fx-text-fill: #EFF1F3;
 }
 
 .button
@@ -13,11 +13,16 @@
 
 .label
 {
-    -fx-text-fill: #1C1C1C;
+    -fx-text-fill: #EFF1F3;
 }
 
 .text
 {
-    -fx-text-fill: #1C1C1C;
+    -fx-text-fill: #032B43;
 }
 
+.text-field
+{
+    -fx-text-fill: #EFF1F3;
+    -fx-background-color: #3C1518;
+}

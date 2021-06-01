@@ -32,10 +32,10 @@
    <bottom>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Don't have an account? Create one!" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Don't have an account? Create one!" />
             <Hyperlink fx:id="hypSignUp" onAction="#registration" text="Sign Up!">
                <font>
-                  <Font name="System Italic" size="15.0" />
+                  <Font name="System Italic" size="13.0" />
                </font></Hyperlink>
          </children>
       </HBox>
@@ -50,7 +50,7 @@
                <children>
                   <Hyperlink onAction="#forgotPassword" prefHeight="29.0" prefWidth="119.0" text="Reset password!">
                      <font>
-                        <Font name="System Italic" size="15.0" />
+                        <Font name="System Italic" size="13.0" />
                      </font>
                      <HBox.margin>
                         <Insets />

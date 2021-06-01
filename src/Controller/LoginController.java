@@ -32,8 +32,7 @@ public class LoginController implements Initializable {
     private TextField txtUsername;
     @FXML
     private TextField txtPassword;
-    // @FXML
-    // private Hyperlink
+
 
 
 
@@ -67,24 +66,25 @@ public class LoginController implements Initializable {
         {
             if (loginModel.isLogin(txtUsername.getText(),txtPassword.getText(), "User"))
             {
-                Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-                root = FXMLLoader.load(getClass().getResource("../View/employeeDashboard.fxml"));
-
                 // loginModel.retrieveInfo(username);
-
-                Scene menuPageScene = new Scene(root);
-                stage.setScene(menuPageScene);
-                stage.show();
+                // Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                // root = FXMLLoader.load(getClass().getResource("../View/employeeDashboard.fxml"));
+                // Scene menuPageScene = new Scene(root);
+                // stage.setScene(menuPageScene);
+                // stage.show();
+                Util.sceneSwitcher("../View/employeeDashboard.fxml", Util.getStage(event));
             }
             else if(loginModel.isLogin(txtUsername.getText(),txtPassword.getText(), "Admin"))
             {
-                Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
                 // loginModel.retrieveInfo(username);
 
-                root = FXMLLoader.load(getClass().getResource("../View/AdminDashboard.fxml"));
-                Scene menuPageScene = new Scene(root);
-                stage.setScene(menuPageScene);
-                stage.show();
+                // Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                // root = FXMLLoader.load(getClass().getResource("../View/AdminDashboard.fxml"));
+                // Scene menuPageScene = new Scene(root);
+                // stage.setScene(menuPageScene);
+                // stage.show();
+                Util.sceneSwitcher("../View/AdminDashboard.fxml", Util.getStage(event));
+
             }
             else
             {
@@ -101,13 +101,16 @@ public class LoginController implements Initializable {
 
         try {
 
-                Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/registration.fxml"));
-                Parent root = loader.load();
-                // Parent root = FXMLLoader.load(getClass().getResource("../View/registration.fxml"));
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
+            // Parent root = FXMLLoader.load(getClass().getResource("../View/registration.fxml"));
+            // Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            // FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/registration.fxml"));
+            // Parent root = loader.load();
+            // Scene scene = new Scene(root);
+            // stage.setScene(scene);
+            // stage.show();
+
+            Util.sceneSwitcher("../View/registration.fxml", Util.getStage(event));
+
 
         } catch ( IOException e) {
             e.printStackTrace();
@@ -115,16 +118,15 @@ public class LoginController implements Initializable {
 
     }
 
-    public void forgotPassword(ActionEvent event) {
+    public void forgotPassword(ActionEvent event)
+    {
         // Parent root = null;
         try {
-
                 // Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
                 // root = FXMLLoader.load(getClass().getResource("../View/forgotPassword.fxml"));
                 // Scene scene = new Scene(root);
                 // stage.setScene(scene);
                 // stage.show();
-
             Util.sceneSwitcher("../View/forgotPassword.fxml", Util.getStage(event));
 
         } catch (IOException e) {

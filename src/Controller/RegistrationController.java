@@ -16,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import main.Util;
 
 
 import java.io.IOException;
@@ -78,7 +79,8 @@ public class RegistrationController implements Initializable
         String secretQuestion = cboSecretQuestion.getValue();
 
 
-        try {
+        try
+        {
             if(password.equals(confirmPassword))
             {
                 if(secretAnswer.equals(confirmSecretAnswer))
@@ -90,11 +92,12 @@ public class RegistrationController implements Initializable
                         if (registrationModel.isRegistered(firstName, secondName, username,
                                 password, secretQuestion, secretAnswer))
                         {
-                            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                            Parent root = FXMLLoader.load(getClass().getResource("../View/loginPage.fxml"));
-                            Scene scene = new Scene(root);
-                            stage.setScene(scene);
-                            stage.show();
+                            // Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                            // Parent root = FXMLLoader.load(getClass().getResource("../View/loginPage.fxml"));
+                            // Scene scene = new Scene(root);
+                            // stage.setScene(scene);
+                            // stage.show();
+                            Util.sceneSwitcher("../View/loginPage.fxml", Util.getStage(event));
                         }
                         else
                         {
@@ -120,17 +123,20 @@ public class RegistrationController implements Initializable
                 lblPasswordStatus.setText("Passwords do not match!, try again!");
             }
         }
-        catch (IOException e) {
+        catch (IOException e)
+        {
             e.printStackTrace();
         }
     }
 
     public void previousPage(ActionEvent event) throws IOException {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("../View/loginPage.fxml"));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+
+        Util.sceneSwitcher("../View/loginPage.fxml", Util.getStage(event));
+        // Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        // Parent root = FXMLLoader.load(getClass().getResource("../View/loginPage.fxml"));
+        // Scene scene = new Scene(root);
+        // stage.setScene(scene);
+        // stage.show();
     }
 
 

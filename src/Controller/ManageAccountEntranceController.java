@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ManageAccountEntrance implements Initializable {
+public class ManageAccountEntranceController implements Initializable {
 
     User user = new User();
 
@@ -62,11 +62,20 @@ public class ManageAccountEntrance implements Initializable {
 
     public void previousPage(ActionEvent event) throws IOException
     {
-        Util.sceneSwitcher("../View/employeeDashboard.fxml", Util.getStage(event));
-        // Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        // Parent root = FXMLLoader.load(getClass().getResource("../View/loginPage.fxml"));
-        // Scene scene = new Scene(root);
-        // stage.setScene(scene);
-        // stage.show();
+        UserHolder holder = UserHolder.getInstance();
+        user = holder.getUser();
+        String userType = user.getRole();
+        if(userType.equals("User")) {
+            Util.sceneSwitcher("../View/employeeDashboard.fxml", Util.getStage(event));
+            // Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            // Parent root = FXMLLoader.load(getClass().getResource("../View/loginPage.fxml"));
+            // Scene scene = new Scene(root);
+            // stage.setScene(scene);
+            // stage.show();
+        }
+        else if(userType.equals("Admin"))
+        {
+            Util.sceneSwitcher("../View/adminDashboard.fxml", Util.getStage(event));
+        }
     }
 }
