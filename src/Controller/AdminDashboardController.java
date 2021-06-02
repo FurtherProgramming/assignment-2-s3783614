@@ -1,17 +1,9 @@
 package Controller;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
 import main.User;
 import main.UserHolder;
 import main.Util;
@@ -31,7 +23,7 @@ public class AdminDashboardController implements Initializable
     public void initialize(URL location, ResourceBundle resources) {
         UserHolder holder = UserHolder.getInstance();
         user = holder.getUser();
-        String name = user.getfName();
+        String name = user.getFirstName();
         // lblWelcome.setText(name);
         lblWelcome.setText("Hello " +
                 name.substring(0,1).toUpperCase() + name.substring(1).toLowerCase());

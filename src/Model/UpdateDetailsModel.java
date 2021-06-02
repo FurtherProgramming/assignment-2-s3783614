@@ -143,9 +143,9 @@ public class UpdateDetailsModel {
 
             if (resultSet.next())
             {
-                user.setfName(resultSet.getString("first_name"));
-                user.setlName(resultSet.getString("last_name"));
-                user.setUserName(resultSet.getString("username"));
+                user.setFirstName(resultSet.getString("first_name"));
+                user.setLastName(resultSet.getString("last_name"));
+                user.setUsername(resultSet.getString("username"));
                 user.setPassword(resultSet.getString("password"));
                 user.setSecQuestion(resultSet.getString("secret_question"));
                 user.setSecAnswer(resultSet.getString("secret_answer"));

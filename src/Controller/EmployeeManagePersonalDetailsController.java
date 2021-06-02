@@ -57,7 +57,7 @@ public class EmployeeManagePersonalDetailsController implements Initializable {
         // }
         String FirstName = txtFirstName.getText();
         String SecondName = txtSecondName.getText();
-        String username = user.getUserName();
+        String username = user.getUsername();
         if(FirstName.equals("") || SecondName.equals(""))
         {
             //TODO: Alert Box

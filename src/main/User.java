@@ -2,9 +2,9 @@ package main;
 
 public class User {
 
-    private String fName;
-    private String lName;
-    private String userName;
+    private String firstName;
+    private String lastName;
+    private String username;
     private String password;
     private String secQuestion;
     private String secAnswer;
@@ -19,9 +19,9 @@ public class User {
 
     public User(String fName, String lName, String userName, String password, String secQuestion, String secAnswer, String role, int empId)
     {
-        this.fName = fName;
-        this.lName = lName;
-        this.userName = userName;
+        this.firstName = fName;
+        this.lastName = lName;
+        this.username = userName;
         this.password = password;
         this.secQuestion = secQuestion;
         this.secAnswer = secAnswer;
@@ -29,28 +29,28 @@ public class User {
         this.empId = empId;
     }
 
-    public String getfName() {
-        return fName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setfName(String fName) {
-        this.fName = fName;
+    public void setFirstName(String fName) {
+        this.firstName = fName;
     }
 
-    public String getlName() {
-        return lName;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setlName(String lName) {
-        this.lName = lName;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String userName) {
+        this.username = userName;
     }
 
     public String getPassword() {

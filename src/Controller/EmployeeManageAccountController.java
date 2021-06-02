@@ -23,7 +23,7 @@ public class EmployeeManageAccountController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         UserHolder holder = UserHolder.getInstance();
         user = holder.getUser();
-        String name = user.getfName();
+        String name = user.getFirstName();
         // lblWelcomeUser.setText(name);
         lblWelcomeUser.setText("Hello " +
                 name.substring(0,1).toUpperCase() + name.substring(1).toLowerCase());

@@ -34,7 +34,7 @@ public class ForgotPasswordP3Controller implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         UserHolder holder = UserHolder.getInstance();
         user = holder.getUser();
-        String name = user.getfName();
+        String name = user.getFirstName();
         lblWelcomeUser.setText("Hello " +
                 name.substring(0,1).toUpperCase() + name.substring(1).toLowerCase());
         lblChecker.setText("");
@@ -46,7 +46,7 @@ public class ForgotPasswordP3Controller implements Initializable {
 
         String newPassword = txtNewPass.getText();
         String confirmNewPassword = txtConfirmNewPass.getText();
-        String username = user.getUserName();
+        String username = user.getUsername();
         if(newPassword.equals(confirmNewPassword))
         {
             try {

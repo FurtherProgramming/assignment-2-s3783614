@@ -61,7 +61,7 @@ public class EmployeeManageSecretQAController implements Initializable {
         UserHolder holder = UserHolder.getInstance();
         User user = new User();
         user = holder.getUser();
-        String username = user.getUserName();
+        String username = user.getUsername();
 
         String answer = txtSecAnswer.getText();
         String confirmAnswer = txtConfirmSecAnswer.getText();

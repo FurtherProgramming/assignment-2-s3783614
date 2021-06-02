@@ -41,7 +41,7 @@ public class EmployeeManagePassword implements Initializable {
 
         String newPass = txtNewPass.getText();
         String confirmNewPass = txtConfirmNewPass.getText();
-        String userName = user.getUserName();
+        String userName = user.getUsername();
 
         if(newPass.equals("") || confirmNewPass.equals(""))
         {

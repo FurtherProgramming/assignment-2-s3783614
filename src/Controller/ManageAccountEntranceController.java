@@ -32,7 +32,7 @@ public class ManageAccountEntranceController implements Initializable {
         UserHolder holder = UserHolder.getInstance();
         user = holder.getUser();
 
-        String name = user.getfName();
+        String name = user.getFirstName();
         String secQ = user.getSecQuestion();
 
         lblStatus.setText("");
