@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import main.SQLConnection;
 import main.User;
+import main.UserHolder;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,26 +23,23 @@ public class ManageEmpsModel
     }
 
     public ObservableList<User> observableEmployeeList() throws SQLException {
-        // System.out.println("Spot 1");
+        connection = SQLConnection.connect();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
         ObservableList<User> employeeList = FXCollections.observableArrayList();
         String query = "SELECT * FROM Employee /*WHERE role = 'User'*/";
-        // System.out.println("Spot 2");
         try
         {
-            // System.out.println("Spot 3");
+            //
+            assert connection != null;
             preparedStatement = connection.prepareStatement(query);
             resultSet = preparedStatement.executeQuery();
 
             while(resultSet.next())
             {
-                // System.out.println("Spot 4");
                 String firstName = resultSet.getString("first_name");
-                // System.out.print(firstName + " ");
                 String lastName = resultSet.getString("last_name");
-                // System.out.println(lastName);
                 String username = resultSet.getString("username");
                 String password = resultSet.getString("password");
                 String secQuestion = resultSet.getString("secret_question");
@@ -58,19 +56,44 @@ public class ManageEmpsModel
         }
         finally
         {
-            // try {
-                assert preparedStatement != null;
-                preparedStatement.close();
-                assert resultSet != null;
-                resultSet.close();
-            // } catch (SQLException throwables) {
-            //     throwables.printStackTrace();
-            // }
-
+            assert connection != null;
+            connection.close();
+            assert preparedStatement != null;
+            preparedStatement.close();
+            assert resultSet != null;
+            resultSet.close();
         }
-        // System.out.println(employeeList);
 
         return employeeList;
+    }
+
+    public void deleteEmployee(int empId) throws SQLException {
+        connection = SQLConnection.connect();
+
+        // User user = new User();
+        // UserHolder holder = UserHolder.getInstance();
+
+        PreparedStatement preparedStatement = null;
+
+
+        String sql = "DELETE FROM Employee WHERE emp_ID = ?";
+        try
+        {
+            assert connection != null;
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, empId);
+            preparedStatement.executeUpdate();
+        }
+        catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
+        finally
+        {
+            assert preparedStatement != null;
+            preparedStatement.close();
+        }
+
     }
 
 
