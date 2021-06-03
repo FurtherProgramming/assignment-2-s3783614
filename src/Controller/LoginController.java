@@ -59,10 +59,11 @@ public class LoginController implements Initializable {
     /* login Action method
        check if user input is the same as database.
      */
-    public void Login(ActionEvent event){
+    public void Login(ActionEvent event)
+    {
 
         String username = txtUsername.getText();
-        String password = txtUsername.getText();
+        String password = txtPassword.getText();
         Parent root = null;
         try
         {
@@ -87,15 +88,7 @@ public class LoginController implements Initializable {
             }
             else if(loginModel.isLogin(username, password, "Admin"))
             {
-                // loginModel.retrieveInfo(username);
-
-                // Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-                // root = FXMLLoader.load(getClass().getResource("../View/AdminDashboard.fxml"));
-                // Scene menuPageScene = new Scene(root);
-                // stage.setScene(menuPageScene);
-                // stage.show();
                 user = UserHolder.getInstance().getUser();
-                // System.out.println("User status: " + user.getStatus());
                 if(user.getStatus().equals("Inactive"))
                 {
 
@@ -120,20 +113,13 @@ public class LoginController implements Initializable {
     public void registration(ActionEvent event)
     {
 
-        try {
-
-            // Parent root = FXMLLoader.load(getClass().getResource("../View/registration.fxml"));
-            // Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            // FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/registration.fxml"));
-            // Parent root = loader.load();
-            // Scene scene = new Scene(root);
-            // stage.setScene(scene);
-            // stage.show();
-
+        try
+        {
             Util.sceneSwitcher("../View/registration.fxml", Util.getStage(event));
             // Util.popUpWindow("../View/registration.fxml", btnLogIn);
-
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
         }
 
