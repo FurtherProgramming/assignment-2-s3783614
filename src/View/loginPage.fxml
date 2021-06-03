@@ -57,7 +57,7 @@
                      </HBox.margin></Hyperlink>
                </children>
             </HBox>
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#Login" prefHeight="38.0" prefWidth="67.0" text="Log In" />
+            <Button fx:id="btnLogIn" alignment="CENTER" mnemonicParsing="false" onAction="#Login" prefHeight="38.0" prefWidth="67.0" text="Log In" />
          </children>
          <BorderPane.margin>
             <Insets left="150.0" right="150.0" />

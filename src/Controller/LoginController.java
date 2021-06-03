@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
@@ -15,6 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import main.User;
+import main.UserHolder;
 import main.Util;
 
 import java.io.IOException;
@@ -32,7 +34,8 @@ public class LoginController implements Initializable {
     private TextField txtUsername;
     @FXML
     private TextField txtPassword;
-
+    @FXML
+    private Button btnLogIn;
 
 
 
@@ -60,21 +63,29 @@ public class LoginController implements Initializable {
 
         String username = txtUsername.getText();
         String password = txtUsername.getText();
-
         Parent root = null;
         try
         {
-            if (loginModel.isLogin(txtUsername.getText(),txtPassword.getText(), "User"))
+            if (loginModel.isLogin(username, password, "User"))
             {
+                user = UserHolder.getInstance().getUser();
+
+                if(user.getStatus().equals("Inactive"))
+                {
+                    Util.alertError("Inactive Account!");
+                }
+                else
+                {
+                    Util.sceneSwitcher("../View/employeeDashboard.fxml", Util.getStage(event));
+                }
                 // loginModel.retrieveInfo(username);
                 // Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
                 // root = FXMLLoader.load(getClass().getResource("../View/employeeDashboard.fxml"));
                 // Scene menuPageScene = new Scene(root);
                 // stage.setScene(menuPageScene);
                 // stage.show();
-                Util.sceneSwitcher("../View/employeeDashboard.fxml", Util.getStage(event));
             }
-            else if(loginModel.isLogin(txtUsername.getText(),txtPassword.getText(), "Admin"))
+            else if(loginModel.isLogin(username, password, "Admin"))
             {
                 // loginModel.retrieveInfo(username);
 
@@ -83,13 +94,23 @@ public class LoginController implements Initializable {
                 // Scene menuPageScene = new Scene(root);
                 // stage.setScene(menuPageScene);
                 // stage.show();
-                Util.sceneSwitcher("../View/AdminDashboard.fxml", Util.getStage(event));
+                user = UserHolder.getInstance().getUser();
+                // System.out.println("User status: " + user.getStatus());
+                if(user.getStatus().equals("Inactive"))
+                {
 
+                    Util.alertError("Inactive Account!");
+                }
+                else
+                {
+                    Util.sceneSwitcher("../View/AdminDashboard.fxml", Util.getStage(event));
+                }
             }
             else
             {
-                isConnected.setTextFill(Color.RED);
-                isConnected.setText("username and password is incorrect");
+                // isConnected.setTextFill(Color.RED);
+                // isConnected.setText("username and password is incorrect");
+                Util.alertError("Incorrect Username and Password!");
             }
         } catch (SQLException | IOException e) {
             e.printStackTrace();
@@ -110,9 +131,9 @@ public class LoginController implements Initializable {
             // stage.show();
 
             Util.sceneSwitcher("../View/registration.fxml", Util.getStage(event));
+            // Util.popUpWindow("../View/registration.fxml", btnLogIn);
 
-
-        } catch ( IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -120,13 +141,12 @@ public class LoginController implements Initializable {
 
     public void forgotPassword(ActionEvent event)
     {
-        // Parent root = null;
         try {
-                // Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-                // root = FXMLLoader.load(getClass().getResource("../View/forgotPassword.fxml"));
-                // Scene scene = new Scene(root);
-                // stage.setScene(scene);
-                // stage.show();
+            // Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            // root = FXMLLoader.load(getClass().getResource("../View/forgotPassword.fxml"));
+            // Scene scene = new Scene(root);
+            // stage.setScene(scene);
+            // stage.show();
             Util.sceneSwitcher("../View/forgotPassword.fxml", Util.getStage(event));
 
         } catch (IOException e) {

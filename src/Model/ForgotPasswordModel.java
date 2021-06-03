@@ -51,8 +51,6 @@ public class ForgotPasswordModel {
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, username);
             resultSet = preparedStatement.executeQuery();
-            // System.out.println(resultSet.next());
-            // return resultSet.next();
             String usernameCheck;
             if(resultSet.next())
             {
@@ -67,6 +65,7 @@ public class ForgotPasswordModel {
                     user.setSecQuestion(resultSet.getString("secret_question"));
                     user.setSecAnswer(resultSet.getString("secret_answer"));
                     user.setRole(resultSet.getString("role"));
+                    user.setStatus(resultSet.getString("status"));
                     holder.setUser(user);
                 }
             }
@@ -78,7 +77,7 @@ public class ForgotPasswordModel {
             e.printStackTrace();
 
         }
-        System.out.println(doesExist);
+
         return doesExist;
     }
 

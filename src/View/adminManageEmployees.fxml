@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="537.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AdminManageEmployeeController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="635.0" prefWidth="814.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AdminManageEmployeeController">
    <top>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -51,9 +51,11 @@
    <right>
       <VBox alignment="BOTTOM_RIGHT" prefHeight="431.0" prefWidth="100.0" spacing="15.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onAction="#deleteEmployee" text="Delete" />
-            <Button mnemonicParsing="false" onAction="#addEmployee" prefHeight="31.0" prefWidth="63.0" text="Add" />
-            <Button fx:id="btnEdit" mnemonicParsing="false" onAction="#editEmployee" prefHeight="31.0" prefWidth="63.0" text="Edit" />
+            <Button mnemonicParsing="false" onAction="#enableEmployee" prefHeight="38.0" prefWidth="72.0" text="Enable" />
+            <Button mnemonicParsing="false" onAction="#disableEmployee" prefHeight="38.0" prefWidth="72.0" text="Disable" />
+            <Button mnemonicParsing="false" onAction="#deleteEmployee" prefHeight="38.0" prefWidth="72.0" text="Delete" />
+            <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#addEmployee" prefHeight="38.0" prefWidth="72.0" text="Add" />
+            <Button fx:id="btnEdit" mnemonicParsing="false" onAction="#editEmployee" prefHeight="38.0" prefWidth="72.0" text="Edit" />
          </children>
          <opaqueInsets>
             <Insets />
@@ -69,7 +71,8 @@
           <TableColumn fx:id="tblEmpId" prefWidth="112.0" text="Employee Id" />
           <TableColumn fx:id="tblFirstName" prefWidth="135.0" text="First Name" />
             <TableColumn fx:id="tblLastName" minWidth="1.0" prefWidth="133.0" text="Last Name" />
-            <TableColumn fx:id="tblUsername" prefWidth="148.0" text="Username" />
+            <TableColumn fx:id="tblUsername" prefWidth="168.0" text="Username" />
+            <TableColumn fx:id="tblStatus" prefWidth="134.0" text="Status" />
         </columns>
          <BorderPane.margin>
             <Insets right="10.0" top="15.0" />

@@ -88,21 +88,14 @@ public class AdminCreateNewEmployeeController implements Initializable {
                         if (registrationModel.isRegistered(firstName, secondName, username,
                                 password, secretQuestion, secretAnswer))
                         {
-                            // Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                            // Parent root = FXMLLoader.load(getClass().getResource("../View/loginPage.fxml"));
-                            // Scene scene = new Scene(root);
-                            // stage.setScene(scene);
-                            // stage.show();
-                            // Util.sceneSwitcher("../View/loginPage.fxml", Util.getStage(event));
-                            Util.exitBtn(btnRegister);
-
+                            Util.alertSuccess("Employee Successfully Created!", btnRegister);
                         }
 
-                        else
-                        {
-                            System.out.println("Ur cooked");
-                            System.exit(1);
-                        }
+                        // else
+                        // {
+                        //     System.out.println("Ur cooked");
+                        //     System.exit(1);
+                        // }
                     }
                     else
                     {

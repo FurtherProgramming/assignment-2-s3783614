@@ -15,6 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.User;
+import main.UserHolder;
 import main.Util;
 
 import java.io.IOException;
@@ -27,7 +28,7 @@ import java.util.ResourceBundle;
 
 public class AdminManageEmployeeController implements Initializable {
     ManageEmpsModel manageEmpsModel = new ManageEmpsModel();
-
+    User user = new User();
     @FXML
     private  TableView<User> tblEmployees;
     @FXML
@@ -39,7 +40,11 @@ public class AdminManageEmployeeController implements Initializable {
     @FXML
     private TableColumn<User, String> tblUsername;
     @FXML
+    private TableColumn<User, String> tblStatus;
+    @FXML
     private Button btnEdit;
+    @FXML
+    private Button btnAdd;
 
 
     @Override
@@ -62,14 +67,96 @@ public class AdminManageEmployeeController implements Initializable {
             tblFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
             tblLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
             tblUsername.setCellValueFactory(new PropertyValueFactory<>("username"));
+            tblStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
 
+    }
+
+    public void enableEmployee(ActionEvent event)
+    {
+        if(tblEmployees.getSelectionModel().getSelectedItem() == null)
+        {
+            String errorMessage = "Please select a field to proceed!";
+            Util.alertError(errorMessage);
+        }
+        else
+        {
+            int empId = tblEmployees.getSelectionModel().getSelectedItem().getEmpId();
+            String status = "Active";
+            // System.out.println("BLAH");
+
+            if(tblEmployees.getSelectionModel().getSelectedItem().getStatus().equals(status))
+            {
+                Util.alertError("Employee is already Active!");
+            }
+            else if(Util.alertConfirmation())
+            {
+                try {
+
+                    // if(tblEmployees.getSelectionModel().getSelectedItem().getStatus().equals(status))
+                    // {
+                    //     Util.alertError("Employee is already inactive!");
+                    // }
+                    // else
+                    // {
+                    manageEmpsModel.updateStatus(status,empId);
+                    fillTable();
+                    // }
+
+                }
+                catch (SQLException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void disableEmployee(ActionEvent event)
+    {
+        if(tblEmployees.getSelectionModel().getSelectedItem() == null)
+        {
+            String errorMessage = "Please select a field to proceed!";
+            Util.alertError(errorMessage);
+        }
+        else
+        {
+            int empId = tblEmployees.getSelectionModel().getSelectedItem().getEmpId();
+            String status = "Inactive";
+            // System.out.println("BLAH");
+
+            if(tblEmployees.getSelectionModel().getSelectedItem().getStatus().equals(status))
+            {
+                Util.alertError("Employee is already inactive!");
+            }
+            else if(Util.alertConfirmation())
+            {
+                try {
+
+                    // if(tblEmployees.getSelectionModel().getSelectedItem().getStatus().equals(status))
+                    // {
+                    //     Util.alertError("Employee is already inactive!");
+                    // }
+                    // else
+                    // {
+                    manageEmpsModel.updateStatus(status,empId);
+                    fillTable();
+                    // }
+
+                }
+                catch (SQLException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     public void deleteEmployee(ActionEvent event)
     {
         if(tblEmployees.getSelectionModel().getSelectedItem() == null)
         {
-            System.out.println("do something!");
+            String errorMessage = "Please select a field to proceed!";
+            Util.alertError(errorMessage);
         }
         else
         {
@@ -86,44 +173,37 @@ public class AdminManageEmployeeController implements Initializable {
         }
     }
 
-    public void editEmployee(ActionEvent event)
-    {
+    public void editEmployee(ActionEvent event) throws IOException {
+
         if(tblEmployees.getSelectionModel().getSelectedItem() == null)
         {
-            //TODO: ALERT BOX
-            System.out.println("do something!");
+            String errorMessage = "Please select a field to proceed!";
+            Util.alertError(errorMessage);
         }
-        // else
-        // {
-        //
-        // }
-        // if(tblEmployees.getSelectionModel().selectedItemProperty())
-        // {
-        //     System.out.println("Yes!!");
-        // }
+        else
+        {
+            int empId = tblEmployees.getSelectionModel().getSelectedItem().getEmpId();
+            UserHolder.getInstance().setEmpId(empId);
+
+            Util.popUpWindow("../View/adminUpdateEmployeeDetails.fxml",btnEdit);
+
+            try
+            {
+                fillTable();
+            }
+            catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
+        }
+
     }
 
-    public void addEmployee(ActionEvent event) throws IOException {
-        // Stage stage = new Stage();
-        // FXMLLoader fXMLLoader;
-        // Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("../View/adminCreateNewEmployee.fxml")));
-        // stage.setScene(new Scene(root));
-        // stage.initModality(Modality.APPLICATION_MODAL);
-        // stage.initOwner(btnEdit.getScene().getWindow());
-        // stage.showAndWait();
+    public void addEmployee(ActionEvent event) throws IOException
+    {
 
-
-        Util.popUpWindow("../View/adminCreateNewEmployee.fxml",btnEdit,Util.getStage(event));
-
-        // Stage stage;
-        // Parent root;
-        // stage = new Stage();
-        // root = FXMLLoader.load(getClass().getResource("../View/adminCreateNewEmployee.fxml"));
-        // stage.setScene(new Scene(root));
-        // stage.initModality(Modality.APPLICATION_MODAL);
-        // stage.initOwner(btnEdit.getScene().getWindow());
-        // stage.showAndWait();
-        // initialize();
+        Util.popUpWindow("../View/adminCreateNewEmployee.fxml",btnAdd);
+        // Util.getStage(event).close();
         try
         {
             fillTable();
@@ -131,17 +211,14 @@ public class AdminManageEmployeeController implements Initializable {
             e.printStackTrace();
         }
 
-        // Util.sceneSwitcher("../View/adminCreateNewEmployee.fxml",Util.getStage(event));
     }
 
 
 
-    public void previousPage(ActionEvent event) throws IOException {
-        // Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        // Parent root = FXMLLoader.load(getClass().getResource("../View/adminDashboard.fxml"));
-        // Scene scene = new Scene(root);
-        // stage.setScene(scene);
-        // stage.show();
+
+
+    public void previousPage(ActionEvent event) throws IOException
+    {
         Util.sceneSwitcher("../View/adminDashboard.fxml", Util.getStage(event));
     }
 

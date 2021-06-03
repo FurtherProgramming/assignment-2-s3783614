@@ -88,15 +88,6 @@ public class LoginModel {
             preparedStatement.setString(3, role);
 
             resultSet = preparedStatement.executeQuery();
-            // System.out.println(resultSet.next());
-            // if(resultSet.next())
-            // {
-            //     newUser.setfName(resultSet.getString("first_name"));
-            // }
-            // holder.setUser(newUser);
-            // resultSet.absolute(0);
-            // resultSet.beforeFirst();
-            // System.out.println(resultSet.next());
             if(resultSet.next())
             {
                 logInCheck = true;
@@ -107,6 +98,7 @@ public class LoginModel {
                 user.setSecQuestion(resultSet.getString("secret_question"));
                 user.setSecAnswer(resultSet.getString("secret_answer"));
                 user.setRole(resultSet.getString("role"));
+                user.setStatus(resultSet.getString("status"));
                 holder.setUser(user);
             }
 
@@ -124,6 +116,7 @@ public class LoginModel {
             assert resultSet != null;
             resultSet.close();
         }
+
 
         return logInCheck;
 

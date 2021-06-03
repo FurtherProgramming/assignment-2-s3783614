@@ -9,6 +9,7 @@ public class User {
     private String secQuestion;
     private String secAnswer;
     private String role;
+    private String status;
     private int empId;
 
 
@@ -17,7 +18,8 @@ public class User {
 
     }
 
-    public User(String fName, String lName, String userName, String password, String secQuestion, String secAnswer, String role, int empId)
+    public User(String fName, String lName, String userName, String password, String secQuestion,
+                String secAnswer, String role, int empId, String status)
     {
         this.firstName = fName;
         this.lastName = lName;
@@ -27,6 +29,7 @@ public class User {
         this.secAnswer = secAnswer;
         this.role = role;
         this.empId = empId;
+        this.status = status;
     }
 
     public String getFirstName() {
@@ -91,5 +94,13 @@ public class User {
 
     public void setEmpId(int empId) {
         this.empId = empId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
