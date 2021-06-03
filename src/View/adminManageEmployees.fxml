@@ -51,11 +51,11 @@
    <right>
       <VBox alignment="BOTTOM_RIGHT" prefHeight="431.0" prefWidth="100.0" spacing="15.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onAction="#enableEmployee" prefHeight="38.0" prefWidth="72.0" text="Enable" />
-            <Button mnemonicParsing="false" onAction="#disableEmployee" prefHeight="38.0" prefWidth="72.0" text="Disable" />
-            <Button mnemonicParsing="false" onAction="#deleteEmployee" prefHeight="38.0" prefWidth="72.0" text="Delete" />
-            <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#addEmployee" prefHeight="38.0" prefWidth="72.0" text="Add" />
-            <Button fx:id="btnEdit" mnemonicParsing="false" onAction="#editEmployee" prefHeight="38.0" prefWidth="72.0" text="Edit" />
+            <Button mnemonicParsing="false" onAction="#enableEmployee" prefHeight="38.0" prefWidth="93.0" text="Activate" />
+            <Button mnemonicParsing="false" onAction="#disableEmployee" prefHeight="38.0" prefWidth="93.0" text="Deactivate" />
+            <Button mnemonicParsing="false" onAction="#deleteEmployee" prefHeight="38.0" prefWidth="93.0" text="Delete" />
+            <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#addEmployee" prefHeight="38.0" prefWidth="93.0" text="Add" />
+            <Button fx:id="btnEdit" mnemonicParsing="false" onAction="#editEmployee" prefHeight="38.0" prefWidth="93.0" text="Edit" />
          </children>
          <opaqueInsets>
             <Insets />

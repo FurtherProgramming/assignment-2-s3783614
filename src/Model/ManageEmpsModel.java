@@ -28,7 +28,7 @@ public class ManageEmpsModel
         ResultSet resultSet = null;
 
         ObservableList<User> employeeList = FXCollections.observableArrayList();
-        String query = "SELECT * FROM Employee /*WHERE role = 'User'*/";
+        String query = "SELECT * FROM Employee WHERE role = 'User'";
         try
         {
             //
@@ -69,6 +69,7 @@ public class ManageEmpsModel
 
     public User fillUserDetails(int empId) throws SQLException {
         User user = new User();
+        connection = SQLConnection.connect();
 
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -77,6 +78,7 @@ public class ManageEmpsModel
 
         try
         {
+            assert connection != null;
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1,empId);
 
@@ -112,12 +114,15 @@ public class ManageEmpsModel
     }
 
     public void editEmployee(int empId, String firstName, String lastName,
-                             String username, String password, String secretQuestion, String secretAnswer) throws SQLException {
+                             String username, String password, String secretQuestion, String secretAnswer) throws SQLException
+    {
+        connection = SQLConnection.connect();
         PreparedStatement preparedStatement = null;
 
         String query = "UPDATE Employee SET first_name = ?, last_name = ?, username = ?, password = ?, secret_question = ?, secret_answer = ? WHERE emp_ID = ?";
         try
         {
+            assert connection != null;
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1,firstName);
             preparedStatement.setString(2,lastName);
@@ -134,6 +139,8 @@ public class ManageEmpsModel
         }
         finally
         {
+            assert connection != null;
+            connection.close();
             assert preparedStatement != null;
             preparedStatement.close();
 
@@ -163,6 +170,8 @@ public class ManageEmpsModel
         }
         finally
         {
+            assert connection != null;
+            connection.close();
             assert preparedStatement != null;
             preparedStatement.close();
         }
@@ -188,6 +197,8 @@ public class ManageEmpsModel
         }
         finally
         {
+            assert connection != null;
+            connection.close();
             assert preparedStatement != null;
             preparedStatement.close();
         }

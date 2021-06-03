@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.ManageEmpsModel;
+import Model.RegistrationModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,6 +21,8 @@ import java.util.ResourceBundle;
 public class AdminUpdateEmployee implements Initializable {
 
     ManageEmpsModel manageEmpsModel = new ManageEmpsModel();
+    RegistrationModel registrationModel = new RegistrationModel();
+
     User user = new User();
     @FXML
     private ComboBox<String> cboxSecretQuestion;
@@ -89,32 +92,34 @@ public class AdminUpdateEmployee implements Initializable {
         if(firstName.equals("") || lastName.equals("") || password.equals("") ||
                 (cboxSecretQuestion.getValue() == null) || secretAnswer.equals(""))
         {
-            //TODO:ALERT BOX
-            System.out.println("No empty fields!");
+
+            Util.alertError("Fields Cannot Be Left Empty!");
+            // System.out.println("No empty fields!");
         }
         else
         {
             try {
-
-                if(password.equals(txtConfirmPassword.getText()))
+                //TODO: USERNAME CHECK
+                //usernameExists() && username != current username
+                if(registrationModel.usernameExists(username) && !username.equals(user.getUsername()))
                 {
-                    if(secretAnswer.equals(txtConfirmSecPassword.getText()))
-                    {
-                        manageEmpsModel.editEmployee(empId,firstName,lastName,username,
-                                                    password,secretQuestion,secretAnswer);
-                        Util.exitBtn(btnUpdate);
-                        // TODO:ALERT SUCCESS
-                    }
-                    else
-                    {
-                        System.out.println("Secret answer does not match!");
+                    Util.alertError("Username is already taken!");
+                }
+                else {
+                    if (password.equals(txtConfirmPassword.getText())) {
+                        if (secretAnswer.equals(txtConfirmSecPassword.getText())) {
+                            manageEmpsModel.editEmployee(empId, firstName, lastName, username,
+                                    password, secretQuestion, secretAnswer);
+                            Util.alertSuccessPopUp("Employee Successfully Updated!", btnUpdate);
+                        } else {
+                            Util.alertError("Secret answers does not match!");
+                            // System.out.println("Secret answer does not match!");
+                        }
+                    } else {
+                        Util.alertError("Passwords does not match!");
+                        // System.out.println("Password does not match!");
                     }
                 }
-                else
-                {
-                    System.out.println("Password does not match!");
-                }
-
             }
             catch (SQLException e)
             {

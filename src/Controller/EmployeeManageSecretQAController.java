@@ -66,29 +66,31 @@ public class EmployeeManageSecretQAController implements Initializable {
         String answer = txtSecAnswer.getText();
         String confirmAnswer = txtConfirmSecAnswer.getText();
         String newQuestion = cboxSecQuest.getValue();
-        /*&& txtSecAnswer.getText() == null && txtConfirmSecAnswer.getText() == null*/
-        if(cboxSecQuest.getValue() == null )
+
+        if(cboxSecQuest.getValue() == null || txtSecAnswer.getText().equals("") || txtConfirmSecAnswer.getText().equals(""))
         {
-            lblSecQuest.setText("Please pick a new secret question!");
-            //TODO: Add alert Box
-        }
-        else if(txtSecAnswer.getText().equals("") || txtConfirmSecAnswer.getText().equals(""))
-        {
-            lblSecAnswerStatus.setText("Please pick a new secret answer!");
-            //TODO: Add alert Box
+            // lblSecQuest.setText("Please pick a new secret question!");
+            Util.alertError("Fields Cannot Be Left Empty!");
+
         }
         else
         {
-            if (answer.equals(confirmAnswer) && cboxSecQuest.getValue() != null) {
+            if (answer.equals(confirmAnswer) /*&& cboxSecQuest.getValue() != null*/) {
                 try {
                     udModel.changeSecAnswer(confirmAnswer, username);
                     udModel.changeSecQuestion(newQuestion, username);
                     udModel.updateUser(username);
+                    Util.alertSuccess("Secret Details Successfully Updated!");
                     Util.sceneSwitcher("../View/employeeManageAccount.fxml", Util.getStage(event));
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
             }
+            else
+            {
+                Util.alertError("Passwords Do Not Match, Try Again!");
+            }
+
         }
 
     }

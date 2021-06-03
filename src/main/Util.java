@@ -61,7 +61,7 @@ public class Util {
     }
 
     @FXML
-    public static void alertSuccess(String message, Button button)
+    public static void alertSuccessPopUp(String message, Button button)
     {
         Alert a1 = new Alert(AlertType.INFORMATION);
         a1.setTitle("SUCCESS!");
@@ -69,6 +69,15 @@ public class Util {
         a1.setHeaderText(null);
         a1.showAndWait();
         ((Stage) button.getScene().getWindow()).close();
+    }
+
+    public static void alertSuccess(String message)
+    {
+        Alert a1 = new Alert(AlertType.INFORMATION);
+        a1.setTitle("SUCCESS!");
+        a1.setContentText(message);
+        a1.setHeaderText(null);
+        a1.showAndWait();
     }
 
     @FXML

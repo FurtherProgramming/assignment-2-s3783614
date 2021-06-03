@@ -58,7 +58,7 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Make a Booking" textAlignment="CENTER" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#makeABooking" prefHeight="50.0" prefWidth="150.0" text="Make a Booking" textAlignment="CENTER" />
             <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Delete a Booking" textAlignment="CENTER" />
             <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#manageAccount" prefHeight="50.0" prefWidth="150.0" text="Manage Account" textAlignment="CENTER" />
          </children>

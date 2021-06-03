@@ -49,15 +49,24 @@ public class ManageAccountEntranceController implements Initializable {
         String userSecAnswer = user.getSecAnswer();
         System.out.println("validating and printing the users answer: " + userSecAnswer);
 
-        if(secAnswer.equals(userSecAnswer))
+        if(secAnswer.equals(""))
         {
-            Util.sceneSwitcher("../View/employeeManageAccount.fxml", Util.getStage(event));
+            Util.alertError("Field cannot be left empty");
         }
         else
         {
-            lblStatus.setTextFill(Color.RED);
-            lblStatus.setText("Incorrect Answer Try Again!");
+            if(secAnswer.equals(userSecAnswer))
+            {
+                Util.sceneSwitcher("../View/employeeManageAccount.fxml", Util.getStage(event));
+            }
+            else
+            {
+                // lblStatus.setTextFill(Color.RED);
+                // lblStatus.setText("Incorrect Answer Try Again!");
+                Util.alertError("Incorrect Answer Try Again!");
+            }
         }
+
     }
 
     public void previousPage(ActionEvent event) throws IOException
@@ -67,11 +76,6 @@ public class ManageAccountEntranceController implements Initializable {
         String userType = user.getRole();
         if(userType.equals("User")) {
             Util.sceneSwitcher("../View/employeeDashboard.fxml", Util.getStage(event));
-            // Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            // Parent root = FXMLLoader.load(getClass().getResource("../View/loginPage.fxml"));
-            // Scene scene = new Scene(root);
-            // stage.setScene(scene);
-            // stage.show();
         }
         else if(userType.equals("Admin"))
         {

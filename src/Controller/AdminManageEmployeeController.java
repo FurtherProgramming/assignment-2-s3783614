@@ -4,16 +4,11 @@ import Model.ManageEmpsModel;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import main.User;
 import main.UserHolder;
 import main.Util;
@@ -21,9 +16,6 @@ import main.Util;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class AdminManageEmployeeController implements Initializable {
@@ -56,7 +48,6 @@ public class AdminManageEmployeeController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
     public void fillTable() throws SQLException {
@@ -68,7 +59,6 @@ public class AdminManageEmployeeController implements Initializable {
             tblLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
             tblUsername.setCellValueFactory(new PropertyValueFactory<>("username"));
             tblStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
-
     }
 
     public void enableEmployee(ActionEvent event)

@@ -38,31 +38,15 @@ public class EmployeeManagePersonalDetailsController implements Initializable {
         User user = new User();
         user = holder.getUser();
 
-        // String userRole = user.getRole();
-
-        // if(txtFirstName.getText() == null || txtFirstName.getText().trim().isEmpty())
-        // {
-        //     if(txtSecondName.getText() == null || txtSecondName.getText().trim().isEmpty())
-        //     {
-        //         lblStatus.setText("nahhh g fill it");
-        //     }
-        //     else
-        //     {
-        //         lblStatus.setText("it works");
-        //     }
-        // }
-        // else
-        // {
-        //     lblStatus.setText("ya yeet!");
-        // }
         String FirstName = txtFirstName.getText();
         String SecondName = txtSecondName.getText();
         String username = user.getUsername();
         if(FirstName.equals("") || SecondName.equals(""))
         {
-            //TODO: Alert Box
-            lblStatus.setTextFill(Color.RED);
-            lblStatus.setText("Field cannot be left Empty");
+
+            // lblStatus.setTextFill(Color.RED);
+            // lblStatus.setText("Field cannot be left Empty");
+            Util.alertError("Fields Cannot Be Left Empty!");
         }
         else
         {
@@ -70,6 +54,7 @@ public class EmployeeManagePersonalDetailsController implements Initializable {
                 udModel.changeFname(FirstName, username);
                 udModel.changeLastname(SecondName, username);
                 udModel.updateUser(username);
+                Util.alertSuccess("Personal Details Successfully Updated!");
                 Util.sceneSwitcher("../View/employeeManageAccount.fxml", Util.getStage(event));
             } catch (SQLException e) {
                 e.printStackTrace();

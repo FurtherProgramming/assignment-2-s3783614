@@ -37,10 +37,9 @@ public class EmployeeDashboardController implements Initializable
     {
         Util.sceneSwitcher("../View/loginPage.fxml", Util.getStage(event));
 
-        // Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        // Parent root = FXMLLoader.load(getClass().getResource("../View/loginPage.fxml"));
-        // Scene scene = new Scene(root);
-        // stage.setScene(scene);
-        // stage.show();
+    }
+
+    public void makeABooking(ActionEvent event) throws IOException {
+        Util.sceneSwitcher("../View/employeeMakeBooking.fxml", Util.getStage(event));
     }
 }

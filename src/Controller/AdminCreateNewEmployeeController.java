@@ -3,18 +3,14 @@ package Controller;
 import Model.RegistrationModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 import main.Util;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -64,7 +60,7 @@ public class AdminCreateNewEmployeeController implements Initializable {
 
 
     @FXML
-    public void employeeCreation(ActionEvent event) {
+    public void employeeCreation() {
         String firstName = txtFirstName.getText();
         String secondName = txtSecondName.getText();
         String username = txtRegoUsername.getText();
@@ -75,11 +71,16 @@ public class AdminCreateNewEmployeeController implements Initializable {
         String secretQuestion = cboSecretQuestion.getValue();
 
 
-        // try
-        // {
-            if(password.equals(confirmPassword))
+        if(firstName.equals("") || secondName.equals("") || username.equals("") || password.equals("") || confirmPassword.equals("") ||
+                secretAnswer.equals("") || confirmSecretAnswer.equals("") ||cboSecretQuestion.getValue() == null)
+        {
+            Util.alertError("Fields Cannot Be Left Empty!");
+        }
+        else {
+
+            if (password.equals(confirmPassword))
             {
-                if(secretAnswer.equals(confirmSecretAnswer))
+                if (secretAnswer.equals(confirmSecretAnswer))
                 {
                     if (!registrationModel.usernameExists(username))
                     {
@@ -88,47 +89,31 @@ public class AdminCreateNewEmployeeController implements Initializable {
                         if (registrationModel.isRegistered(firstName, secondName, username,
                                 password, secretQuestion, secretAnswer))
                         {
-                            Util.alertSuccess("Employee Successfully Created!", btnRegister);
+                            Util.alertSuccessPopUp("Employee Successfully Created!", btnRegister);
                         }
-
-                        // else
-                        // {
-                        //     System.out.println("Ur cooked");
-                        //     System.exit(1);
-                        // }
                     }
                     else
                     {
-                        lblStatus.setTextFill(Color.RED);
-                        lblStatus.setText("This username has already been taken, try again!");
+                        // lblStatus.setTextFill(Color.RED);
+                        // lblStatus.setText("This username has already been taken, try again!");
+                        Util.alertError("This username has already been taken, try again!");
                     }
                 }
                 else
                 {
-                    lblSecretPassStatus.setTextFill(Color.RED);
-                    lblSecretPassStatus.setText("Passwords do not match!, try again!");
+                    // lblSecretPassStatus.setTextFill(Color.RED);
+                    // lblSecretPassStatus.setText("Passwords do not match!, try again!");
+                    Util.alertError("Secret Passwords do not match, try again!");
                 }
             }
             else
             {
-                lblPasswordStatus.setTextFill(Color.RED);
-                lblPasswordStatus.setText("Passwords do not match!, try again!");
+                // lblPasswordStatus.setTextFill(Color.RED);
+                // lblPasswordStatus.setText("Passwords do not match!, try again!");
+                Util.alertError("Passwords do not match, try again!");
             }
-        // }
-        // catch (IOException e)
-        // {
-        //     e.printStackTrace();
-        // }
+        }
     }
 
-    public void previousPage(ActionEvent event) throws IOException {
-
-        Util.sceneSwitcher("../View/loginPage.fxml", Util.getStage(event));
-        // Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        // Parent root = FXMLLoader.load(getClass().getResource("../View/loginPage.fxml"));
-        // Scene scene = new Scene(root);
-        // stage.setScene(scene);
-        // stage.show();
-    }
 
 }

@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.paint.Color;
 import main.User;
 import main.UserHolder;
 import main.Util;
@@ -44,24 +43,26 @@ public class ForgotPasswordP2Controller implements Initializable
 
         String userInput = txtAnswer.getText();
         String storedAnswer = user.getSecAnswer();
-        if(userInput.equals(storedAnswer))
+        if(userInput.equals(""))
         {
-            Util.sceneSwitcher("../View/forgotPasswordP3.fxml", Util.getStage(event));
+            Util.alertError("Field Cannot Be Left Empty!");
         }
         else
         {
-            lblStatus.setTextFill(Color.RED);
-            lblStatus.setText("Incorrect Answer!");
+            if(userInput.equals(storedAnswer))
+            {
+                Util.sceneSwitcher("../View/forgotPasswordP3.fxml", Util.getStage(event));
+            }
+            else
+            {
+                // lblStatus.setTextFill(Color.RED);
+                // lblStatus.setText("Incorrect Answer!");
+                Util.alertError("Incorrect Answer!");
+            }
         }
     }
 
     public void previousPage(ActionEvent event) throws IOException {
-        // Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        // Parent root = FXMLLoader.load(getClass().getResource("../View/loginPage.fxml"));
-        // Scene scene = new Scene(root);
-        // stage.setScene(scene);
-        // stage.show();
-        //GO BACK HOME ALWAYS
         Util.sceneSwitcher("../View/loginPage.fxml", Util.getStage(event));
 
     }

@@ -34,7 +34,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#previousPage" text="Back" />
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#previousPage" text="Log Out" />
                </children>
                <padding>
                   <Insets right="25.0" />
@@ -49,7 +49,10 @@
    <center>
       <VBox alignment="CENTER" prefHeight="328.0" prefWidth="600.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="lblWelcome" text="Hello: What would you like to do today?" />
+            <Label fx:id="lblWelcome" text="Hello: What would you like to do today?">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font></Label>
             <Button fx:id="btnLockdown" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#lockdownConditions" prefHeight="50.0" prefWidth="158.0" text="Lockdown Condition" textAlignment="CENTER" />
             <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="158.0" text="Manage Booking" textAlignment="CENTER" />
             <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#manageAdminAccount" prefHeight="50.0" prefWidth="158.0" text="Manage Account" textAlignment="CENTER" />

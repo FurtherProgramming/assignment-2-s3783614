@@ -40,43 +40,30 @@ public class ForgotPasswordController implements Initializable
 
     public void userNameValidation(ActionEvent event) throws IOException {
         String username = txtUsername.getText();
-        if(forgotPasswordModel.usernameExists(username))
+
+        if(username.equals(""))
         {
-            // Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            // Parent root = FXMLLoader.load(getClass().getResource("../View/loginPage.fxml"));
-            // Scene scene = new Scene(root);
-            // stage.setScene(scene);
-            // stage.show();
-            // loginModel.retrieveInfo(username);
-            // Util.sceneSwitcher("../View/forgotPasswordP2.fxml", Util.getStage(event));
-
-
-            // Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            // Parent root = FXMLLoader.load(getClass().getResource("../View/forgotPasswordP2.fxml"));
-            // Scene scene = new Scene(root);
-            // stage.setScene(scene);
-            // stage.show();
-
-            Util.sceneSwitcher("../View/forgotPasswordP2.fxml", Util.getStage(event));
-
+            Util.alertError("Field Cannot Be Left Empty!");
         }
         else
         {
-            lblUsernameStatus.setText("This username does not exist!");
-            lblUsernameStatus.setTextFill(Color.RED);
+            if(forgotPasswordModel.usernameExists(username))
+            {
+                Util.sceneSwitcher("../View/forgotPasswordP2.fxml", Util.getStage(event));
+            }
+            else
+            {
+                // lblUsernameStatus.setText("This username does not exist!");
+                // lblUsernameStatus.setTextFill(Color.RED);
+                Util.alertError("This username does not exist!");
+            }
+
         }
     }
 
     public void previousPage(ActionEvent event) throws IOException {
-        // Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        // Parent root = FXMLLoader.load(getClass().getResource("../View/loginPage.fxml"));
-        // Scene scene = new Scene(root);
-        // stage.setScene(scene);
-        // stage.show();
-
         Util.sceneSwitcher("../View/loginPage.fxml", Util.getStage(event));
     }
 
 
-    //TODO: Create and follow singleton
 }

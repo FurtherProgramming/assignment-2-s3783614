@@ -47,28 +47,32 @@ public class ForgotPasswordP3Controller implements Initializable {
         String newPassword = txtNewPass.getText();
         String confirmNewPassword = txtConfirmNewPass.getText();
         String username = user.getUsername();
-        if(newPassword.equals(confirmNewPassword))
+        if(newPassword.equals("") || confirmNewPassword.equals(""))
         {
-            try {
-                fpmodel.changePassword(newPassword,username);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            Util.sceneSwitcher("../View/loginPage.fxml",Util.getStage(event));
+            Util.alertError("Fields Cannot Be Left Empty!");
         }
         else
         {
-            lblChecker.setTextFill(Color.RED);
-            lblChecker.setText("Passwords Do Not Match!");
+            if(newPassword.equals(confirmNewPassword))
+            {
+                try {
+                    fpmodel.changePassword(newPassword,username);
+                    Util.alertSuccess("Password Successfully Changed!");
+                    Util.sceneSwitcher("../View/loginPage.fxml",Util.getStage(event));
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            else
+            {
+                // lblChecker.setTextFill(Color.RED);
+                // lblChecker.setText("Passwords Do Not Match!");
+                Util.alertError("Passwords Do Not Match!");
+            }
         }
     }
 
     public void previousPage(ActionEvent event) throws IOException {
-        // Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        // Parent root = FXMLLoader.load(getClass().getResource("../View/loginPage.fxml"));
-        // Scene scene = new Scene(root);
-        // stage.setScene(scene);
-        // stage.show();
         Util.sceneSwitcher("../View/loginPage.fxml", Util.getStage(event));
     }
 

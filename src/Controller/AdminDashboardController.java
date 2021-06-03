@@ -24,7 +24,7 @@ public class AdminDashboardController implements Initializable
         UserHolder holder = UserHolder.getInstance();
         user = holder.getUser();
         String name = user.getFirstName();
-        // lblWelcome.setText(name);
+
         lblWelcome.setText("Hello " +
                 name.substring(0,1).toUpperCase() + name.substring(1).toLowerCase());
     }

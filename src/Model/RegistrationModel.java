@@ -51,6 +51,7 @@ public class RegistrationModel {
 
     public boolean usernameExists(String username)
     {
+        connection = SQLConnection.connect();
         PreparedStatement preparedStatement= null;
         ResultSet resultSet = null;
         String query = "SELECT * FROM Employee WHERE username = ?";
@@ -59,6 +60,7 @@ public class RegistrationModel {
 
         try
         {
+            assert connection != null;
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, username);
             resultSet = preparedStatement.executeQuery();

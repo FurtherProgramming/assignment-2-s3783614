@@ -45,9 +45,7 @@ public class EmployeeManagePassword implements Initializable {
 
         if(newPass.equals("") || confirmNewPass.equals(""))
         {
-            //TODO: Alert Box
-            lblStatus.setTextFill(Color.RED);
-            lblStatus.setText("Field cannot be left Empty");
+            Util.alertError("Fields Cannot Be Left Empty!");
         }
         else
         {
@@ -57,6 +55,7 @@ public class EmployeeManagePassword implements Initializable {
                 {
                     udModel.changePassword(newPass,userName);
                     udModel.updateUser(userName);
+                    Util.alertSuccess("Password Updated Successfully!");
                     Util.sceneSwitcher("../View/employeeManageAccount.fxml", Util.getStage(event));
 
                 }
@@ -67,8 +66,9 @@ public class EmployeeManagePassword implements Initializable {
             }
             else
             {
-                lblStatus.setTextFill(Color.RED);
-                lblStatus.setText("Passwords, do not match!");
+                // lblStatus.setTextFill(Color.RED);
+                // lblStatus.setText("Passwords, do not match!");
+                Util.alertError("Passwords, do not match!");
             }
         }
 
@@ -77,10 +77,5 @@ public class EmployeeManagePassword implements Initializable {
     public void previousPage(ActionEvent event) throws IOException
     {
         Util.sceneSwitcher("../View/employeeManageAccount.fxml", Util.getStage(event));
-        // Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        // Parent root = FXMLLoader.load(getClass().getResource("../View/loginPage.fxml"));
-        // Scene scene = new Scene(root);
-        // stage.setScene(scene);
-        // stage.show();
     }
 }
