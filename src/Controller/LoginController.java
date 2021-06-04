@@ -28,8 +28,8 @@ public class LoginController implements Initializable {
     User user = new User();
 
     public LoginModel loginModel = new LoginModel();
-    @FXML
-    private Label isConnected;
+    // @FXML
+    // private Label isConnected;
     @FXML
     private TextField txtUsername;
     @FXML
@@ -38,22 +38,22 @@ public class LoginController implements Initializable {
     private Button btnLogIn;
 
 
-
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
+    //
+    // private Stage stage;
+    // private Scene scene;
+    // private Parent root;
 
     // Check database connection
     @Override
     public void initialize(URL location, ResourceBundle resources){
-        if (loginModel.isDbConnected())
-        {
-            isConnected.setText("Connected");
-        }
-        else
-        {
-            isConnected.setText("Not Connected");
-        }
+        // if (loginModel.isDbConnected())
+        // {
+        //     isConnected.setText("Connected");
+        // }
+        // else
+        // {
+        //     isConnected.setText("Not Connected");
+        // }
 
     }
     /* login Action method
@@ -64,7 +64,7 @@ public class LoginController implements Initializable {
 
         String username = txtUsername.getText();
         String password = txtPassword.getText();
-        Parent root = null;
+        // Parent root = null;
         try
         {
             if (loginModel.isLogin(username, password, "User"))

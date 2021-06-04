@@ -10,6 +10,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -23,7 +24,19 @@ public class Util {
         return (Stage)((Node)event.getSource()).getScene().getWindow();
     }
 
-    public static void popUpWindow(String page, Button button) throws IOException
+
+    public static void popUpRectangleWindow(String page, Rectangle rectangle) throws IOException
+    {
+        Parent root;
+        Stage stage = new Stage();
+        root = FXMLLoader.load(Util.class.getResource(page));
+        stage.setScene(new Scene(root));
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(rectangle.getScene().getWindow());
+        stage.showAndWait();
+    }
+
+    public static void popButtonUpWindow(String page, Button button) throws IOException
     {
         Parent root;
         Stage stage = new Stage();

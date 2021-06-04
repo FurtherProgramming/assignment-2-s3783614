@@ -112,7 +112,6 @@ public class AdminManageEmployeeController implements Initializable {
         {
             int empId = tblEmployees.getSelectionModel().getSelectedItem().getEmpId();
             String status = "Inactive";
-            // System.out.println("BLAH");
 
             if(tblEmployees.getSelectionModel().getSelectedItem().getStatus().equals(status))
             {
@@ -148,7 +147,7 @@ public class AdminManageEmployeeController implements Initializable {
             String errorMessage = "Please select a field to proceed!";
             Util.alertError(errorMessage);
         }
-        else
+        else if(Util.alertConfirmation())
         {
             int empId = tblEmployees.getSelectionModel().getSelectedItem().getEmpId();
 
@@ -157,7 +156,9 @@ public class AdminManageEmployeeController implements Initializable {
                 manageEmpsModel.deleteEmployee(empId);
                 System.out.println("EmpId : " + empId);
                 fillTable();
-            } catch (SQLException e) {
+            }
+            catch (SQLException e)
+            {
                 e.printStackTrace();
             }
         }
@@ -175,7 +176,7 @@ public class AdminManageEmployeeController implements Initializable {
             int empId = tblEmployees.getSelectionModel().getSelectedItem().getEmpId();
             UserHolder.getInstance().setEmpId(empId);
 
-            Util.popUpWindow("../View/adminUpdateEmployeeDetails.fxml",btnEdit);
+            Util.popButtonUpWindow("../View/adminUpdateEmployeeDetails.fxml",btnEdit);
 
             try
             {
@@ -192,12 +193,14 @@ public class AdminManageEmployeeController implements Initializable {
     public void addEmployee(ActionEvent event) throws IOException
     {
 
-        Util.popUpWindow("../View/adminCreateNewEmployee.fxml",btnAdd);
+        Util.popButtonUpWindow("../View/adminCreateNewEmployee.fxml",btnAdd);
         // Util.getStage(event).close();
         try
         {
             fillTable();
-        } catch (SQLException e) {
+        }
+        catch (SQLException e)
+        {
             e.printStackTrace();
         }
 
