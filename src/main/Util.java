@@ -115,4 +115,14 @@ public class Util {
         return status;
     }
 
+    @FXML
+    public static void alertWarning(String message)
+    {
+        Alert a1 = new Alert(AlertType.WARNING);
+        a1.setTitle("WARNING!");
+        a1.setContentText(message);
+        a1.setHeaderText(null);
+        a1.showAndWait();
+    }
+
 }

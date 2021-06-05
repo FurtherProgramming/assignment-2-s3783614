@@ -11,6 +11,11 @@ public class Booking
     private String table;
     private String status;
 
+    public Booking()
+    {
+
+    }
+
     public Booking(int bookingId, String empUsername, LocalDate date,
                    String table, String status)
     {

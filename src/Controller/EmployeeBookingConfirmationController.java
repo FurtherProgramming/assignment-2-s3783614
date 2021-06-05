@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.EmployeeBookingModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -9,10 +10,12 @@ import main.UserHolder;
 import main.Util;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class EmployeeBookingConfirmationController implements Initializable {
+    EmployeeBookingModel ebModel = new EmployeeBookingModel();
 
     @FXML
     private TextField txtName;
@@ -45,6 +48,19 @@ public class EmployeeBookingConfirmationController implements Initializable {
 
     public void confirm()
     {
-        Util.alertSuccessPopUp("Booking successful!" , btnConfirm);
+        String username = UserHolder.getInstance().getUser().getUsername();
+        String tableNo = UserHolder.getInstance().getTableNo();
+        LocalDate date = UserHolder.getInstance().getDate();
+
+        try {
+            if(ebModel.addBooking(username, tableNo, date))
+            {
+                Util.alertSuccessPopUp("Booking successful!", btnConfirm);
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
     }
 }
