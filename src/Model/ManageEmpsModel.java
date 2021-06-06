@@ -47,7 +47,9 @@ public class ManageEmpsModel
                 String role = resultSet.getString("role");
                 String status = resultSet.getString("status");
                 int empId = resultSet.getInt("emp_ID");
-                User user = new User(firstName,lastName,username,password,secQuestion,secretAnswer,role,empId,status);
+                String previousTable = resultSet.getString("previous_table");
+                User user = new User(firstName,lastName,username,password,secQuestion,
+                                            secretAnswer,role,empId,status,previousTable);
                 employeeList.add(user);
             }
         }
@@ -95,6 +97,7 @@ public class ManageEmpsModel
                 user.setSecAnswer(resultSet.getString("secret_answer"));
                 user.setRole(resultSet.getString("role"));
                 user.setStatus(resultSet.getString("status"));
+                user.setPreviousTable(resultSet.getString("previous_table"));
 
             }
         }

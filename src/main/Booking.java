@@ -10,6 +10,7 @@ public class Booking
     private LocalDate date;
     private String table;
     private String status;
+    private String reservation;
 
     public Booking()
     {
@@ -17,13 +18,14 @@ public class Booking
     }
 
     public Booking(int bookingId, String empUsername, LocalDate date,
-                   String table, String status)
+                   String table, String status, String reservation)
     {
         this.bookingId = bookingId;
         this.empUsername = empUsername;
         this.date = date;
         this.table = table;
         this.status = status;
+        this.reservation = reservation;
     }
 
     public int getBookingId() {
@@ -64,6 +66,14 @@ public class Booking
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getReservation() {
+        return reservation;
+    }
+
+    public void setReservation(String reservation) {
+        this.reservation = reservation;
     }
 
 

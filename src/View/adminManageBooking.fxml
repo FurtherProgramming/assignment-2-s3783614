@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="561.0" prefWidth="709.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AdminManageBookingController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="561.0" prefWidth="837.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AdminManageBookingController">
    <top>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -47,6 +47,7 @@
             <TableColumn fx:id="tblBookDate" prefWidth="138.0" text="Booking Date" />
             <TableColumn fx:id="tblBookedTable" prefWidth="116.0" text="Booked Table" />
             <TableColumn fx:id="tblStatus" prefWidth="108.0" text="Status" />
+            <TableColumn fx:id="tblReservation" prefWidth="124.0" text="Reservation" />
         </columns>
          <BorderPane.margin>
             <Insets top="15.0" />

@@ -99,6 +99,7 @@ public class LoginModel {
                 user.setSecAnswer(resultSet.getString("secret_answer"));
                 user.setRole(resultSet.getString("role"));
                 user.setStatus(resultSet.getString("status"));
+                user.setPreviousTable(resultSet.getString("previous_table"));
                 holder.setUser(user);
             }
 

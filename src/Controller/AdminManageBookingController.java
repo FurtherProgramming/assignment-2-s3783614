@@ -37,6 +37,8 @@ public class AdminManageBookingController implements Initializable
     private TableColumn<Booking, String> tblBookedTable;
     @FXML
     private TableColumn<Booking, String> tblStatus;
+    @FXML
+    private TableColumn<Booking, String> tblReservation;
 
     @Override
     public void initialize(URL location, ResourceBundle resources)
@@ -67,17 +69,18 @@ public class AdminManageBookingController implements Initializable
         tblBookDate.setCellValueFactory(new PropertyValueFactory<>("date"));
         tblBookedTable.setCellValueFactory(new PropertyValueFactory<>("table"));
         tblStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+        tblReservation.setCellValueFactory(new PropertyValueFactory<>("reservation"));
     }
 
     public void deleteOldBookings() throws SQLException
     {
-        LocalDate yesterday = LocalDate.now().minusDays(1);
-        System.out.println(yesterday);
+        LocalDate yesterday = LocalDate.now();
+        // System.out.println(yesterday);
         boolean check = manageBookingModel.bookingsExistsOnDate(yesterday);
-        System.out.println(check);
+        // System.out.println(check);
         if(check)
         {
-            manageBookingModel.deletePreviousBookings(yesterday, "Pending");
+            manageBookingModel.deletePreviousBookings(yesterday);
         }
     }
 
@@ -95,15 +98,15 @@ public class AdminManageBookingController implements Initializable
                 LocalDate today = LocalDate.now();
                 int compareDate = today.compareTo(bookingDate);
 
-                if (compareDate == 0)
-                {
-                    //TODO: better message and also figure out a way to make button disappear.
-                    Util.alertError("Cannot alter booking status");
-                    // btnApprove.setVisible(false);
-
-                }
-                else
-                {
+                // if (compareDate == 0)
+                // {
+                //     //TODO: better message and also figure out a way to make button disappear.
+                //     Util.alertError("Cannot alter booking status");
+                //     // btnApprove.setVisible(false);
+                //
+                // }
+                // else
+                // {
                     //TODO confirmation alert -> write in message this will delete all emps with same table :)
                     boolean confirm = Util.alertConfirmation();
                     if(confirm)
@@ -113,9 +116,9 @@ public class AdminManageBookingController implements Initializable
 
                         manageBookingModel.approveBooking(bookingID, "Approved");
                         LocalDate date = tblBooking.getSelectionModel().getSelectedItem().getDate();
-                        manageBookingModel.deletePreviousBookings(date, "Pending");
+                        manageBookingModel.deletePreviousBookings(date);
                         fillTable();
-                    }
+                    // }
 
                 }
             }

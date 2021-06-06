@@ -185,7 +185,12 @@
             <Insets bottom="20.0" />
          </BorderPane.margin>
          <children>
-            <Button fx:id="btnCheckIn" mnemonicParsing="false" prefHeight="38.0" prefWidth="87.0" text="Check In" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" />
+            <Button fx:id="btnCheckIn" mnemonicParsing="false" onAction="#checkIn" prefHeight="38.0" prefWidth="87.0" text="Check In" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" />
+            <Label fx:id="lblLockdown" text="Lockdown Condition" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
          </children>
       </GridPane>
    </bottom>

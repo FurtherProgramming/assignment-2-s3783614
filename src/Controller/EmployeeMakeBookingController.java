@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.EmployeeBookingModel;
+import Model.ManageEmpsModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -24,6 +25,7 @@ import java.util.ResourceBundle;
 public class EmployeeMakeBookingController implements Initializable {
     User user = new User();
     EmployeeBookingModel ebModel = new EmployeeBookingModel();
+    ManageEmpsModel manageEmpsModel = new ManageEmpsModel();
 
     private final Color emptySeat = Color.LIGHTGREEN;
     private final Color bookedSeat = Color.RED;
@@ -41,6 +43,8 @@ public class EmployeeMakeBookingController implements Initializable {
     private Label lblLockdown;
     @FXML
     private Button btnManageBooking;
+    @FXML
+    private Button btnCheckIn;
 
     @FXML private Rectangle Table1;
     @FXML private Rectangle Table2;
@@ -89,7 +93,7 @@ public class EmployeeMakeBookingController implements Initializable {
     {
         LocalDate date = dtpBooking.getValue();
         System.out.println( "setTables method : " + date);
-
+        //Sets Up all tables
         ArrayList<Booking> bookings = ebModel.getBookings(date);
         if (bookings.isEmpty()) {
             Table1.setFill(emptySeat);
@@ -103,58 +107,67 @@ public class EmployeeMakeBookingController implements Initializable {
         } else {
             assignTables(bookings);
         }
+
         user = UserHolder.getInstance().getUser();
 
-
+        // Managing the delete selection
         if(ebModel.bookingExists(user.getUsername()))
         {
+            btnManageBooking.setVisible(true);
             lblCurrentBooking.setText("You have already have a booking");
 
             Booking booking = ebModel.getBookingDetails(user.getUsername());
-            // if(booking == null)
-            // {
-            //     System.out.println("No bookings bud!");
-            // }
-            // else
-            // {
-                LocalDate bookingDate = booking.getDate();
-                LocalDate cutOffDate = bookingDate.minusDays(2);
-                LocalDate today = LocalDate.now();
-                int compareValue = today.compareTo(cutOffDate);
 
-                if(compareValue > 0)
-                {
-                    //TODO: SPLIT INTO 2 LATER
-                    lblCurrentBooking.setText( "Current booking: " + bookingDate +
-                            " Booking Status: " + booking.getStatus());
-                    btnManageBooking.setVisible(false);
+            LocalDate bookingDate = booking.getDate();
+            LocalDate cutOffDate = bookingDate.minusDays(2);
+            LocalDate today = LocalDate.now();
+            int compareValue = today.compareTo(cutOffDate);
 
-                    System.out.println("Today is later than Cutoff Data");
-                    System.out.println("booking date : " + bookingDate);
-                    System.out.println("cutoff date : "  + cutOffDate);
-                    System.out.println("today: " + today);
-                }
-                else if (compareValue < 0)
-                {
+            if(compareValue > 0)
+            {
+                //TODO: SPLIT INTO 2 LATER
+                lblCurrentBooking.setText( "Current booking: " + bookingDate +
+                        " Booking Status: " + booking.getStatus());
+                btnManageBooking.setVisible(false);
 
-                    System.out.println("Today is earlier than Cutoff Data");
-                    System.out.println("booking date : " + bookingDate);
-                    System.out.println("cutoff date : "  + cutOffDate);
-                    System.out.println("today: " + today);
-                }
-                else
-                {
-                    System.out.println("both dates are equal");
-                    System.out.println("booking date : " + bookingDate);
-                    System.out.println("cutoff date : "  + cutOffDate);
-                    System.out.println("today: " + today);
-                }
-            // }
+                System.out.println("Today is later than Cutoff Data");
+                System.out.println("booking date : " + bookingDate);
+                System.out.println("cutoff date : "  + cutOffDate);
+                System.out.println("today: " + today);
+            }
+            //TODO: check these conditions later
+            else if (compareValue < 0)
+            {
+                System.out.println("Today is earlier than Cutoff Data");
+                System.out.println("booking date : " + bookingDate);
+                System.out.println("cutoff date : "  + cutOffDate);
+                System.out.println("today: " + today);
+            }
+            else
+            {
+                System.out.println("both dates are equal");
+                System.out.println("booking date : " + bookingDate);
+                System.out.println("cutoff date : "  + cutOffDate);
+                System.out.println("today: " + today);
+            }
+
+            //allowing check in
+            int compareCheckIn = today.compareTo(bookingDate);
+            //TODO: OR reservation status = "In"
+            //TODO: rethink second check
+            if(compareCheckIn != 0 || (booking.getStatus().equals("Pending")) || booking.getReservation().equals("In")){
+                btnCheckIn.setVisible(false);
+            }
         }
         else
         {
             lblCurrentBooking.setText("No booking to manage!");
+            btnCheckIn.setVisible(false);
+            btnManageBooking.setVisible(false);
+
         }
+
+
 
     }
 
@@ -201,6 +214,7 @@ public class EmployeeMakeBookingController implements Initializable {
         }
     }
 
+    //Employee delete their own bookings
     public void manageBooking(ActionEvent event) throws IOException
     {
         user = UserHolder.getInstance().getUser();
@@ -214,6 +228,7 @@ public class EmployeeMakeBookingController implements Initializable {
             else
             {
                 Util.alertError("No Booking To Manage!");
+                // btnManageBooking.setVisible(false);
             }
         }
         catch (SQLException e)
@@ -228,6 +243,12 @@ public class EmployeeMakeBookingController implements Initializable {
     {
         //Grabs the details of the rectangle that gets clicked
         Rectangle rectangleClicked = (Rectangle) event.getSource();
+        user = UserHolder.getInstance().getUser();
+        if(user.getPreviousTable() == null)
+        {
+            System.out.println("previous table: " + user.getPreviousTable());
+
+        }
 
         try {
 
@@ -241,6 +262,10 @@ public class EmployeeMakeBookingController implements Initializable {
             else if(ebModel.bookingExists(user.getUsername()))
             {
                 Util.alertError("Please delete your previous booking, to make a new one");
+            }
+            else if(user.getPreviousTable().equals(rectangleClicked.getId()))
+            {
+                Util.alertError("Please be a bit more social, Pick another table!");
             }
             else
             {
@@ -270,6 +295,12 @@ public class EmployeeMakeBookingController implements Initializable {
     }
 
 
+    public void checkIn(ActionEvent event) throws IOException
+    {
+        Util.popButtonUpWindow("../View/employeeCheckIn.fxml",btnCheckIn);
+    }
+
+    //Move back to previous page
     public void previousPage(ActionEvent event) throws IOException
     {
         Util.sceneSwitcher("../View/employeeDashboard.fxml", Util.getStage(event));

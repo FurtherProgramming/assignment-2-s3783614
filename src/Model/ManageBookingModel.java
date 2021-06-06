@@ -47,8 +47,9 @@ public class ManageBookingModel {
                 LocalDate date = LocalDate.parse(dateStr);
                 String table = resultSet.getString("booked_table");
                 String status = resultSet.getString("booking_status");
+                String reservation = resultSet.getString("reservation");
 
-                Booking booking = new Booking(bookingId,empUsername,date,table,status);
+                Booking booking = new Booking(bookingId,empUsername,date,table,status,reservation);
                 bookingList.add(booking);
             }
         }
@@ -126,11 +127,11 @@ public class ManageBookingModel {
 
 
 
-    public void deletePreviousBookings(LocalDate date, String status) throws SQLException
+    public void deletePreviousBookings(LocalDate date) throws SQLException
     {
         connection = SQLConnection.connect();
         PreparedStatement preparedStatement = null;
-        String query = "DELETE FROM Booking WHERE date = ? AND booking_status = ?";
+        String query = "DELETE FROM Booking WHERE date < ?";
         String dateStr = date.toString();
 
         try
@@ -138,7 +139,7 @@ public class ManageBookingModel {
             assert connection != null;
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1,dateStr);
-            preparedStatement.setString(2,status);
+            // preparedStatement.setString(2,status);
             preparedStatement.executeUpdate();
 
         }

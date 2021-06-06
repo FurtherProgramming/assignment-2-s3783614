@@ -43,9 +43,10 @@ public class EmployeeBookingModel {
                 String dateStr = resultSet.getString("date");
                 String table = resultSet.getString("booked_table");
                 String status = resultSet.getString("booking_status");
+                String reservation = resultSet.getString("reservation");
                 LocalDate dbDate = LocalDate.parse(dateStr);
 
-                Booking booking = new Booking(bookingId, empUsername, dbDate, table, status);
+                Booking booking = new Booking(bookingId, empUsername, dbDate, table, status, reservation);
                 bookings.add(booking);
             }
         } catch (SQLException e) {
@@ -63,6 +64,7 @@ public class EmployeeBookingModel {
     //Returns booking details for particular employee
     public Booking getBookingDetails(String username) throws SQLException {
         Booking booking = new Booking();
+        connection = SQLConnection.connect();
 
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -71,6 +73,7 @@ public class EmployeeBookingModel {
 
         try
         {
+            assert connection != null;
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, username);
             resultSet = preparedStatement.executeQuery();
@@ -82,9 +85,10 @@ public class EmployeeBookingModel {
                 String dateStr = resultSet.getString("date");
                 String table = resultSet.getString("booked_table");
                 String status = resultSet.getString("booking_status");
+                String reservation = resultSet.getString("reservation");
                 LocalDate dbDate = LocalDate.parse(dateStr);
 
-                booking = new Booking(bookingId, empUsername, dbDate, table, status);
+                booking = new Booking(bookingId, empUsername, dbDate, table, status, reservation);
 
             }
         }
@@ -190,5 +194,7 @@ public class EmployeeBookingModel {
             preparedStatement.close();
         }
     }
+
+
 
 }
