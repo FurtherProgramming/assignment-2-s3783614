@@ -50,7 +50,7 @@ public class AdminDashboardController implements Initializable
 
     }
 
-    public void  manageAdminAccount(ActionEvent event) throws IOException{
+    public void manageAdminAccount(ActionEvent event) throws IOException{
         // Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         // Parent root = FXMLLoader.load(getClass().getResource("../View/adminManageAccount.fxml"));
         // Scene scene = new Scene(root);
@@ -61,7 +61,7 @@ public class AdminDashboardController implements Initializable
 
     }
 
-    public void  manageEmployee(ActionEvent event) throws IOException{
+    public void manageEmployee(ActionEvent event) throws IOException{
         // Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         // Parent root = FXMLLoader.load(getClass().getResource("../View/adminManageEmployees.fxml"));
         // Scene scene = new Scene(root);
@@ -70,5 +70,10 @@ public class AdminDashboardController implements Initializable
 
         Util.sceneSwitcher("../View/adminManageEmployees.fxml", Util.getStage(event));
 
+    }
+
+    public void manageBooking(ActionEvent event) throws IOException
+    {
+        Util.sceneSwitcher("../View/adminManageBooking.fxml", Util.getStage(event));
     }
 }

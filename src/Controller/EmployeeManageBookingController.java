@@ -53,6 +53,7 @@ public class EmployeeManageBookingController implements Initializable {
 
     }
 
+    // To delete booking
     public void deleteBooking(ActionEvent event)
     {
         user = UserHolder.getInstance().getUser();

@@ -61,7 +61,7 @@ public class EmployeeBookingModel {
     }
 
     //Returns booking details for particular employee
-    public  Booking getBookingDetails(String username) throws SQLException {
+    public Booking getBookingDetails(String username) throws SQLException {
         Booking booking = new Booking();
 
         PreparedStatement preparedStatement = null;

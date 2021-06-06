@@ -54,7 +54,7 @@
                   <Font name="System Bold" size="20.0" />
                </font></Label>
             <Button fx:id="btnLockdown" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#lockdownConditions" prefHeight="50.0" prefWidth="158.0" text="Lockdown Condition" textAlignment="CENTER" />
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="158.0" text="Manage Booking" textAlignment="CENTER" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#manageBooking" prefHeight="50.0" prefWidth="158.0" text="Manage Booking" textAlignment="CENTER" />
             <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#manageAdminAccount" prefHeight="50.0" prefWidth="158.0" text="Manage Account" textAlignment="CENTER" />
             <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#manageEmployee" prefHeight="50.0" prefWidth="158.0" text="Manage Employee" textAlignment="CENTER" />
             <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="158.0" text="Graphical Visual" textAlignment="CENTER" />

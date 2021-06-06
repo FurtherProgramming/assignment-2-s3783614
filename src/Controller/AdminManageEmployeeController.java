@@ -190,7 +190,7 @@ public class AdminManageEmployeeController implements Initializable {
 
     }
 
-    public void addEmployee(ActionEvent event) throws IOException
+    public void addEmployee() throws IOException
     {
 
         Util.popButtonUpWindow("../View/adminCreateNewEmployee.fxml",btnAdd);
@@ -205,9 +205,6 @@ public class AdminManageEmployeeController implements Initializable {
         }
 
     }
-
-
-
 
 
     public void previousPage(ActionEvent event) throws IOException
