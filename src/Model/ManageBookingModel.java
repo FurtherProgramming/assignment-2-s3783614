@@ -125,7 +125,33 @@ public class ManageBookingModel {
     }
 
 
+    public void deleteSameBooking(LocalDate date, String bookedTable ,String status) throws SQLException
+    {
+        connection = SQLConnection.connect();
+        PreparedStatement preparedStatement = null;
+        String query = "DELETE FROM Booking WHERE date = ? AND booked_table = ? AND booking_status = ? ";
+        String dateStr = date.toString();
 
+        try
+        {
+            assert connection != null;
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1,dateStr);
+            preparedStatement.setString(2,bookedTable);
+            preparedStatement.setString(3,status);
+            preparedStatement.executeUpdate();
+
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            assert preparedStatement != null;
+            preparedStatement.close();
+        }
+    }
 
     public void deletePreviousBookings(LocalDate date) throws SQLException
     {

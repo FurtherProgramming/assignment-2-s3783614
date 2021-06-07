@@ -96,7 +96,9 @@ public class AdminManageBookingController implements Initializable
 
                 LocalDate bookingDate = tblBooking.getSelectionModel().getSelectedItem().getDate();
                 LocalDate today = LocalDate.now();
+
                 int compareDate = today.compareTo(bookingDate);
+                //TODO: Enable later
 
                 // if (compareDate == 0)
                 // {
@@ -113,10 +115,11 @@ public class AdminManageBookingController implements Initializable
                     {
                         int bookingID = tblBooking.getSelectionModel().getSelectedItem().getBookingId();
                         System.out.println("selected booking Id is: " + bookingID);
+                        String bookedTable = tblBooking.getSelectionModel().getSelectedItem().getTable();
 
-                        manageBookingModel.approveBooking(bookingID, "Approved");
                         LocalDate date = tblBooking.getSelectionModel().getSelectedItem().getDate();
-                        manageBookingModel.deletePreviousBookings(date);
+                        manageBookingModel.approveBooking(bookingID, "Approved");
+                        manageBookingModel.deleteSameBooking(date, bookedTable, "Pending");
                         fillTable();
                     // }
 

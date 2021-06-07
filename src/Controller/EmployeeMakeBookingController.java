@@ -91,11 +91,15 @@ public class EmployeeMakeBookingController implements Initializable {
 
     public void setUp() throws SQLException
     {
+        String condition = UserHolder.getInstance().getCondition();
+
         LocalDate date = dtpBooking.getValue();
+        ArrayList<Booking> bookings = ebModel.getBookings(date);
         System.out.println( "setTables method : " + date);
         //Sets Up all tables
-        ArrayList<Booking> bookings = ebModel.getBookings(date);
-        if (bookings.isEmpty()) {
+
+        if (bookings.isEmpty())
+        {
             Table1.setFill(emptySeat);
             Table2.setFill(emptySeat);
             Table3.setFill(emptySeat);
@@ -104,9 +108,14 @@ public class EmployeeMakeBookingController implements Initializable {
             Table6.setFill(emptySeat);
             Table7.setFill(emptySeat);
             Table8.setFill(emptySeat);
-        } else {
+        }
+        else
+        {
             assignTables(bookings);
         }
+
+
+
 
         user = UserHolder.getInstance().getUser();
 
@@ -135,6 +144,7 @@ public class EmployeeMakeBookingController implements Initializable {
                 System.out.println("cutoff date : "  + cutOffDate);
                 System.out.println("today: " + today);
             }
+
             //TODO: check these conditions later
             else if (compareValue < 0)
             {

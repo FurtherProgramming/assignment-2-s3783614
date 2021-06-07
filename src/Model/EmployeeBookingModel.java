@@ -108,7 +108,10 @@ public class EmployeeBookingModel {
     }
 
 
-    public boolean bookingExists(String username/*, LocalDate date*/) throws SQLException {
+    public boolean bookingExists(String username/*, LocalDate date*/) throws SQLException
+    {
+        connection = SQLConnection.connect();
+
         boolean exists = false;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -116,6 +119,7 @@ public class EmployeeBookingModel {
         String query = "SELECT * FROM Booking WHERE emp_username = ? /*AND date = ?*/";
         try
         {
+            assert connection != null;
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1,username);
             // String dateStr = date.toString();
@@ -135,6 +139,8 @@ public class EmployeeBookingModel {
         }
         finally
         {
+            assert connection != null;
+            connection.close();
             assert preparedStatement != null;
             preparedStatement.close();
             assert resultSet != null;

@@ -3,6 +3,7 @@ package Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import main.User;
 import main.UserHolder;
@@ -18,6 +19,8 @@ public class AdminDashboardController implements Initializable
 
     @FXML
     private Label lblWelcome;
+    @FXML
+    private Button btnLockdown;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -30,46 +33,20 @@ public class AdminDashboardController implements Initializable
     }
 
     public void previousPage(ActionEvent event) throws IOException {
-        // Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        // Parent root = FXMLLoader.load(getClass().getResource("../View/loginPage.fxml"));
-        // Scene scene = new Scene(root);
-        // stage.setScene(scene);
-        // stage.show();
-
         Util.sceneSwitcher("../View/loginPage.fxml", Util.getStage(event));
-
     }
 
     public void lockdownConditions(ActionEvent event) throws IOException {
-        // Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        // Parent root = FXMLLoader.load(getClass().getResource("../View/adminLockdownCondition.fxml"));
-        // Scene scene = new Scene(root);
-        // stage.setScene(scene);
-        // stage.show();
-        Util.sceneSwitcher("../View/adminLockdownCondition.fxml", Util.getStage(event));
+        Util.popButtonUpWindow("../View/adminLockdownCondition.fxml", btnLockdown);
 
     }
 
     public void manageAdminAccount(ActionEvent event) throws IOException{
-        // Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        // Parent root = FXMLLoader.load(getClass().getResource("../View/adminManageAccount.fxml"));
-        // Scene scene = new Scene(root);
-        // stage.setScene(scene);
-        // stage.show();
-
         Util.sceneSwitcher("../View/secretQuestionPage.fxml", Util.getStage(event));
-
     }
 
     public void manageEmployee(ActionEvent event) throws IOException{
-        // Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        // Parent root = FXMLLoader.load(getClass().getResource("../View/adminManageEmployees.fxml"));
-        // Scene scene = new Scene(root);
-        // stage.setScene(scene);
-        // stage.show();
-
         Util.sceneSwitcher("../View/adminManageEmployees.fxml", Util.getStage(event));
-
     }
 
     public void manageBooking(ActionEvent event) throws IOException
