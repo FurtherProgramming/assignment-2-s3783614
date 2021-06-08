@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.EmployeeBookingModel;
+import Model.LockdownConditionsModel;
 import Model.ManageEmpsModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,10 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import main.Booking;
-import main.User;
-import main.UserHolder;
-import main.Util;
+import main.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -26,6 +24,8 @@ public class EmployeeMakeBookingController implements Initializable {
     User user = new User();
     EmployeeBookingModel ebModel = new EmployeeBookingModel();
     ManageEmpsModel manageEmpsModel = new ManageEmpsModel();
+    LockdownConditionsModel lcm = new LockdownConditionsModel();
+
 
     private final Color emptySeat = Color.LIGHTGREEN;
     private final Color bookedSeat = Color.RED;
@@ -91,27 +91,55 @@ public class EmployeeMakeBookingController implements Initializable {
 
     public void setUp() throws SQLException
     {
-        String condition = UserHolder.getInstance().getCondition();
+        // String condition = UserHolder.getInstance().getCondition();
 
         LocalDate date = dtpBooking.getValue();
-        ArrayList<Booking> bookings = ebModel.getBookings(date);
-        System.out.println( "setTables method : " + date);
-        //Sets Up all tables
-
-        if (bookings.isEmpty())
+        if(lcm.conditionExists(date))
         {
-            Table1.setFill(emptySeat);
-            Table2.setFill(emptySeat);
-            Table3.setFill(emptySeat);
-            Table4.setFill(emptySeat);
-            Table5.setFill(emptySeat);
-            Table6.setFill(emptySeat);
-            Table7.setFill(emptySeat);
-            Table8.setFill(emptySeat);
+            Lockdown lockdown = lcm.retriveConditions(date);
+            String lockdownCondition = lockdown.getLockdownStatus();
+            ArrayList<Booking> bookings = ebModel.getBookings(date);
+            if(lockdownCondition.equals("Social Distancing"))
+            {
+                if(bookings.isEmpty())
+                {
+                    Table1.setFill(socialDistance);
+                    Table2.setFill(emptySeat);
+                    Table3.setFill(socialDistance);
+                    Table4.setFill(emptySeat);
+                    Table5.setFill(socialDistance);
+                    Table6.setFill(emptySeat);
+                    Table7.setFill(socialDistance);
+                    Table8.setFill(emptySeat);
+                }
+                else
+                {
+                    assignTables(bookings, "Social Distancing");
+                }
+
+            }
+            else if(lockdownCondition.equals("Full Lockdown"))
+            {
+                Table1.setFill(totalLock);
+                Table2.setFill(totalLock);
+                Table3.setFill(totalLock);
+                Table4.setFill(totalLock);
+                Table5.setFill(totalLock);
+                Table6.setFill(totalLock);
+                Table7.setFill(totalLock);
+                Table8.setFill(totalLock);
+            }
+            else
+            {
+                setTables(date);
+            }
+
+
         }
+        // if no condition default to what we had
         else
         {
-            assignTables(bookings);
+            setTables(date);
         }
 
 
@@ -163,8 +191,6 @@ public class EmployeeMakeBookingController implements Initializable {
 
             //allowing check in
             int compareCheckIn = today.compareTo(bookingDate);
-            //TODO: OR reservation status = "In"
-            //TODO: rethink second check
             if(compareCheckIn != 0 || (booking.getStatus().equals("Pending")) || booking.getReservation().equals("In")){
                 btnCheckIn.setVisible(false);
             }
@@ -174,15 +200,33 @@ public class EmployeeMakeBookingController implements Initializable {
             lblCurrentBooking.setText("No booking to manage!");
             btnCheckIn.setVisible(false);
             btnManageBooking.setVisible(false);
-
         }
-
-
 
     }
 
+    public void setTables(LocalDate date) throws SQLException {
+        ArrayList<Booking> bookings = ebModel.getBookings(date);
+        // System.out.println( "setTables method : " + date);
+        //Sets Up all tables
 
-    public void assignTables(ArrayList<Booking> booking)
+        if (bookings.isEmpty())
+        {
+            Table1.setFill(emptySeat);
+            Table2.setFill(emptySeat);
+            Table3.setFill(emptySeat);
+            Table4.setFill(emptySeat);
+            Table5.setFill(emptySeat);
+            Table6.setFill(emptySeat);
+            Table7.setFill(emptySeat);
+            Table8.setFill(emptySeat);
+        }
+        else
+        {
+            assignTables(bookings, "No Restriction");
+        }
+    }
+
+    public void assignTables(ArrayList<Booking> booking, String lockdownStatus)
     {
         ArrayList<Rectangle> tables = new ArrayList<>();
         tables.add(Table1);
@@ -194,32 +238,37 @@ public class EmployeeMakeBookingController implements Initializable {
         tables.add(Table7);
         tables.add(Table8);
 
-        // for (Rectangle table : tables) {
-        // }
-        for (Rectangle table : tables)
+        for(int i = 0; i < tables.size(); i++)
         {
-            table.setFill(emptySeat);
+            if(lockdownStatus.equals("Social Distancing"))
+            {
+                tables.get(i).setFill(emptySeat);
+
+                if(i % 2 == 0)
+                {
+                    tables.get(i).setFill(socialDistance);
+                }
+            }
+            else
+            {
+                tables.get(i).setFill(emptySeat);
+            }
             for (Booking value : booking)
             {
-                String tableStr = table.getId();
+                String tableStr = tables.get(i).getId();
                 if (value.getTable().equals(tableStr))
                 {
                     if(value.getStatus().equals("Pending"))
                     {
                         System.out.println(tableStr + " : pending");
-                        table.setFill(pendingSeat);
+                        tables.get(i).setFill(pendingSeat);
                     }
                     else if(value.getStatus().equals("Approved"))
                     {
                         System.out.println(tableStr + " : booked");
-                        table.setFill(bookedSeat);
+                        tables.get(i).setFill(bookedSeat);
                     }
                 }
-                // else if(!table.getFill().equals(bookedSeat) && !table.getFill().equals(pendingSeat))
-                // {
-                //     // System.out.println(table.getId() +  " being set to green");
-                //     table.setFill(emptySeat);
-                // }
             }
         }
     }
@@ -238,7 +287,6 @@ public class EmployeeMakeBookingController implements Initializable {
             else
             {
                 Util.alertError("No Booking To Manage!");
-                // btnManageBooking.setVisible(false);
             }
         }
         catch (SQLException e)

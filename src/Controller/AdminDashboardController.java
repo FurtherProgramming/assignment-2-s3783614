@@ -53,4 +53,10 @@ public class AdminDashboardController implements Initializable
     {
         Util.sceneSwitcher("../View/adminManageBooking.fxml", Util.getStage(event));
     }
+
+    public void generateCSV(ActionEvent event) throws IOException
+    {
+        Util.popButtonUpWindow("../View/adminGenerateCSV.fxml", btnLockdown);
+
+    }
 }

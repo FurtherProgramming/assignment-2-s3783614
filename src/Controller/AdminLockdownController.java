@@ -45,46 +45,87 @@ public class AdminLockdownController implements Initializable
         cBoxType.setItems(lockdown);
     }
 
+    // public void setLockdown(ActionEvent event)
+    // {
+    //     String previousCondition = UserHolder.getInstance().getCondition();
+    //     String condition = cBoxType.getValue();
+    //
+    //     if(previousCondition.equals(condition))
+    //     {
+    //         Util.alertError("No change to current condition!");
+    //     }
+    //     // else if(condition.equals("No Restriction"))
+    //     // {
+    //     //     if(Util.alertConfirmation())
+    //     //     {
+    //     //         Util.alertSuccessPopUp("Successfully Set New Restriction", btnConfirm);
+    //     //
+    //     //     }
+    //     // }
+    //     //TODO: have to customize message!
+    //     else if(Util.alertConfirmation())
+    //     {
+    //         LocalDate restrictionDate = dtpLockdownDate.getValue();
+    //         System.out.println("restrictionDate: " + restrictionDate);
+    //
+    //         try
+    //         {
+    //             if(!condition.equals("No Restriction"))
+    //             {
+    //                 lcm.deleteBookings(restrictionDate);
+    //             }
+    //             UserHolder.getInstance().setCondition(condition);
+    //             UserHolder.getInstance().setConditionDate(restrictionDate);
+    //             Util.alertSuccessPopUp("Successfully Set New Restriction", btnConfirm);
+    //
+    //         }
+    //         catch (SQLException e)
+    //         {
+    //             e.printStackTrace();
+    //         }
+    //
+    //
+    //     }
+    // }
+
     public void setLockdown(ActionEvent event)
     {
-        String previousCondition = UserHolder.getInstance().getCondition();
-        String condition = cBoxType.getValue();
-
-        if(previousCondition.equals(condition))
+        String status = cBoxType.getValue();
+        LocalDate restrictionDate = dtpLockdownDate.getValue();
+        try
         {
-            Util.alertError("No change to current condition!");
-        }
-        // else if(condition.equals("No Restriction"))
-        // {
-        //     if(Util.alertConfirmation())
-        //     {
-        //         Util.alertSuccessPopUp("Successfully Set New Restriction", btnConfirm);
-        //
-        //     }
-        // }
-        //TODO: have to customize message!
-        else if(Util.alertConfirmation())
-        {
-            LocalDate restrictionDate = dtpLockdownDate.getValue();
-            System.out.println("restrictionDate: " + restrictionDate);
-
-            try
+            if(lcm.conditionExists(restrictionDate))
             {
-                if(!condition.equals("No Restriction"))
+                if(Util.alertConfirmation())
                 {
-                    lcm.deleteBookings(restrictionDate);
+                    lcm.updateCondition(restrictionDate,status);
+                    if(!status.equals("No Restriction"))
+                    {
+                        lcm.deleteBookings(restrictionDate);
+                    }
+                    Util.alertSuccessPopUp("Restriction successfully Updated!", btnConfirm);
                 }
-                UserHolder.getInstance().setCondition(condition);
-                UserHolder.getInstance().setConditionDate(restrictionDate);
-                Util.alertSuccessPopUp("Successfully Set New Restriction", btnConfirm);
-
             }
-            catch (SQLException e)
+            else
             {
-                e.printStackTrace();
+                if(Util.alertConfirmation())
+                {
+                    if(lcm.newCondition(status,restrictionDate))
+                    {
+                        if(!status.equals("No Restriction"))
+                        {
+                            lcm.deleteBookings(restrictionDate);
+                        }
+                        // lcm.deleteBookings(restrictionDate);
+                        Util.alertSuccessPopUp("Restriction Successfully Created!", btnConfirm);
+                    }
+                }
             }
 
-
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
         }
     }
 
