@@ -172,7 +172,7 @@
       <Insets left="30.0" right="30.0" />
    </padding>
    <bottom>
-      <GridPane prefHeight="38.0" prefWidth="811.0" BorderPane.alignment="CENTER">
+      <GridPane prefHeight="59.0" prefWidth="811.0" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="449.0" minWidth="10.0" prefWidth="440.0" />
@@ -185,7 +185,7 @@
             <Insets bottom="20.0" />
          </BorderPane.margin>
          <children>
-            <Button fx:id="btnCheckIn" mnemonicParsing="false" onAction="#checkIn" prefHeight="38.0" prefWidth="87.0" text="Check In" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" />
+            <Button fx:id="btnCheckIn" mnemonicParsing="false" onAction="#checkIn" prefHeight="45.0" prefWidth="87.0" text="Check In" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" />
             <Label fx:id="lblLockdown" text="Lockdown Condition" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
                   <Font size="25.0" />

@@ -1,0 +1,4 @@
+booking_ID, emp_username, date, booked_table, booking_status, reservation
+1,a,2021-06-11,Table2,Approved,Out
+4,z,2021-06-11,Table8,Approved,Out
+5,q,2021-06-12,Table2,Approved,Out

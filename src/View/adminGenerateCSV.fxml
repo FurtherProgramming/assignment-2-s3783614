@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AdminGenerateCSV">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AdminGenerateCSVController">
    <top>
       <GridPane prefHeight="40.0" prefWidth="600.0" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -46,8 +46,8 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <Button fx:id="btnEmployee" mnemonicParsing="false" prefHeight="38.0" prefWidth="128.0" text="Employee CSV" />
-            <Button fx:id="btnLockdown" mnemonicParsing="false" prefHeight="38.0" prefWidth="128.0" text="Lockdown CSV" />
+            <Button fx:id="btnEmployee" mnemonicParsing="false" onAction="#employeeCSV" prefHeight="38.0" prefWidth="128.0" text="Employee CSV" />
+            <Button fx:id="btnLockdown" mnemonicParsing="false" onAction="#lockdownCSV" prefHeight="38.0" prefWidth="128.0" text="Lockdown CSV" />
             <Button fx:id="btnBooking" mnemonicParsing="false" onAction="#bookingCSV" prefHeight="38.0" prefWidth="128.0" text="Booking CSV" />
          </children>
       </VBox>
