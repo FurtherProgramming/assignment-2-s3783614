@@ -66,8 +66,8 @@
                <children>
                   <DatePicker fx:id="dtpLockdownDate" prefHeight="31.0" prefWidth="235.0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
                   <ComboBox fx:id="cBoxType" prefHeight="31.0" prefWidth="235.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label text="Date for Restriction" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                  <Label text="Type of Restriciction" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <Label text="Date for Restriction" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" />
+                  <Label text="Type of Restriciction" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="CENTER" />
                </children>
             </GridPane>
          </children>

@@ -51,7 +51,7 @@ public class EmployeeCheckInController implements Initializable
     public void confirmCheckIn(ActionEvent event)
     {
         user = UserHolder.getInstance().getUser();
-        if(Util.alertConfirmation())
+        if(Util.alertConfirmation("You are about to check in, Are you sure?"))
         {
             try
             {

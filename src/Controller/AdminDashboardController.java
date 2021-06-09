@@ -21,6 +21,8 @@ public class AdminDashboardController implements Initializable
     private Label lblWelcome;
     @FXML
     private Button btnLockdown;
+    @FXML
+    private Button btnVisual;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -57,6 +59,10 @@ public class AdminDashboardController implements Initializable
     public void generateCSV(ActionEvent event) throws IOException
     {
         Util.popButtonUpWindow("../View/adminGenerateCSV.fxml", btnLockdown);
+    }
 
+    public void graphicVisual() throws IOException
+    {
+        Util.popButtonUpWindow("../View/adminGraphicalVisual.fxml", btnVisual);
     }
 }

@@ -94,12 +94,14 @@ public class Util {
     }
 
     @FXML
-    public static boolean alertConfirmation()
+    public static boolean alertConfirmation(String message)
     {
         boolean status = false;
         Alert a1 = new Alert(AlertType.CONFIRMATION, "", ButtonType.YES, ButtonType.NO);
         a1.setTitle("CONFIRMATION");
-        a1.setContentText("ARE YOU SURE?");
+        // a1.setContentText("ARE YOU SURE?");
+        a1.setContentText(message);
+
         a1.setHeaderText(null);
 
         Optional<ButtonType> result = a1.showAndWait();

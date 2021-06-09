@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.stage.Stage;
 import main.UserHolder;
@@ -43,52 +44,23 @@ public class AdminLockdownController implements Initializable
         dtpLockdownDate.setValue(LocalDate.now().plusDays(3));
         cBoxType.setValue(restrictionType);
         cBoxType.setItems(lockdown);
+
+        dtpLockdownDate.setDayCellFactory(d ->
+            new DateCell()
+            {
+                @Override
+                public void updateItem(LocalDate item, boolean empty)
+                {
+                    super.updateItem(item, empty);
+                    setDisable(item.isBefore(LocalDate.now()));
+                }
+            }
+        );
     }
 
-    // public void setLockdown(ActionEvent event)
-    // {
-    //     String previousCondition = UserHolder.getInstance().getCondition();
-    //     String condition = cBoxType.getValue();
-    //
-    //     if(previousCondition.equals(condition))
-    //     {
-    //         Util.alertError("No change to current condition!");
-    //     }
-    //     // else if(condition.equals("No Restriction"))
-    //     // {
-    //     //     if(Util.alertConfirmation())
-    //     //     {
-    //     //         Util.alertSuccessPopUp("Successfully Set New Restriction", btnConfirm);
-    //     //
-    //     //     }
-    //     // }
-    //     //TODO: have to customize message!
-    //     else if(Util.alertConfirmation())
-    //     {
-    //         LocalDate restrictionDate = dtpLockdownDate.getValue();
-    //         System.out.println("restrictionDate: " + restrictionDate);
-    //
-    //         try
-    //         {
-    //             if(!condition.equals("No Restriction"))
-    //             {
-    //                 lcm.deleteBookings(restrictionDate);
-    //             }
-    //             UserHolder.getInstance().setCondition(condition);
-    //             UserHolder.getInstance().setConditionDate(restrictionDate);
-    //             Util.alertSuccessPopUp("Successfully Set New Restriction", btnConfirm);
-    //
-    //         }
-    //         catch (SQLException e)
-    //         {
-    //             e.printStackTrace();
-    //         }
-    //
-    //
-    //     }
-    // }
 
-    public void setLockdown(ActionEvent event)
+
+    public void setLockdown()
     {
         String status = cBoxType.getValue();
         LocalDate restrictionDate = dtpLockdownDate.getValue();
@@ -96,7 +68,8 @@ public class AdminLockdownController implements Initializable
         {
             if(lcm.conditionExists(restrictionDate))
             {
-                if(Util.alertConfirmation())
+                // Todo: better confirmation message!
+                if(Util.alertConfirmation("Updating conditions might delete bookings!"))
                 {
                     lcm.updateCondition(restrictionDate,status);
                     if(!status.equals("No Restriction"))
@@ -108,7 +81,7 @@ public class AdminLockdownController implements Initializable
             }
             else
             {
-                if(Util.alertConfirmation())
+                if(Util.alertConfirmation("Updating conditions might delete bookings!"))
                 {
                     if(lcm.newCondition(status,restrictionDate))
                     {
@@ -129,7 +102,7 @@ public class AdminLockdownController implements Initializable
         }
     }
 
-    public void cancel(ActionEvent event) throws IOException
+    public void cancel()
     {
         Util.exitBtn(btnCancel);
     }

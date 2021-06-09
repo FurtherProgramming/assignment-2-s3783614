@@ -78,7 +78,7 @@ public class AdminManageEmployeeController implements Initializable {
             {
                 Util.alertError("Employee is already Active!");
             }
-            else if(Util.alertConfirmation())
+            else if(Util.alertConfirmation("Are you sure?"))
             {
                 try {
 
@@ -117,7 +117,7 @@ public class AdminManageEmployeeController implements Initializable {
             {
                 Util.alertError("Employee is already inactive!");
             }
-            else if(Util.alertConfirmation())
+            else if(Util.alertConfirmation("Disabling the employee will deny them access to their account. Are you sure?"))
             {
                 try {
 
@@ -147,7 +147,7 @@ public class AdminManageEmployeeController implements Initializable {
             String errorMessage = "Please select a field to proceed!";
             Util.alertError(errorMessage);
         }
-        else if(Util.alertConfirmation())
+        else if(Util.alertConfirmation("Are you sure you want to delete employee?"))
         {
             int empId = tblEmployees.getSelectionModel().getSelectedItem().getEmpId();
 

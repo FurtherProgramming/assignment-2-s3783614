@@ -46,7 +46,6 @@ public class AdminManageBookingController implements Initializable
 
         try
         {
-            //TODO: Possibly write a setup method just calling these two
             deleteOldBookings();
             fillTable();
         }
@@ -58,9 +57,6 @@ public class AdminManageBookingController implements Initializable
 
     public void fillTable() throws SQLException
     {
-        // TODO: Manual whitelisting technique
-        //  Will have to use method from manageEmployees to retrieve
-        //  the user list and just bring over a previous desk
         ObservableList<Booking> bookings;
         bookings = manageBookingModel.observableBookings();
         tblBooking.setItems(bookings);
@@ -75,9 +71,8 @@ public class AdminManageBookingController implements Initializable
     public void deleteOldBookings() throws SQLException
     {
         LocalDate yesterday = LocalDate.now();
-        // System.out.println(yesterday);
         boolean check = manageBookingModel.bookingsExistsOnDate(yesterday);
-        // System.out.println(check);
+
         if(check)
         {
             manageBookingModel.deletePreviousBookings(yesterday);
@@ -102,7 +97,7 @@ public class AdminManageBookingController implements Initializable
 
                 // if (compareDate == 0)
                 // {
-                //     //TODO: better message and also figure out a way to make button disappear.
+                //
                 //     Util.alertError("Cannot alter booking status");
                 //     // btnApprove.setVisible(false);
                 //
@@ -110,7 +105,7 @@ public class AdminManageBookingController implements Initializable
                 // else
                 // {
                     //TODO confirmation alert -> write in message this will delete all emps with same table :)
-                    boolean confirm = Util.alertConfirmation();
+                    boolean confirm = Util.alertConfirmation("Approving this request will delete other requests to sit on the same table!");
                     if(confirm)
                     {
                         int bookingID = tblBooking.getSelectionModel().getSelectedItem().getBookingId();

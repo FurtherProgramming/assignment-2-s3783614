@@ -150,6 +150,7 @@ public class UpdateDetailsModel {
                 user.setSecQuestion(resultSet.getString("secret_question"));
                 user.setSecAnswer(resultSet.getString("secret_answer"));
                 user.setRole(resultSet.getString("role"));
+                user.setPreviousTable(resultSet.getString("previous_table"));
                 holder.setUser(user);
             }
         }

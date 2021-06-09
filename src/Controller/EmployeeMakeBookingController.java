@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -28,10 +27,10 @@ public class EmployeeMakeBookingController implements Initializable {
 
 
     private final Color emptySeat = Color.LIGHTGREEN;
-    private final Color bookedSeat = Color.RED;
-    private final Color pendingSeat = Color.	SKYBLUE;
-    private final Color socialDistance = Color.ORANGE;
-    private final Color totalLock = Color.DARKRED;
+    private final Color bookedSeat = Color.LIGHTCORAL;
+    private final Color pendingSeat = Color.SKYBLUE;
+    private final Color socialDistance = Color.DARKORANGE;
+    private final Color totalLock = Color.CRIMSON;
 
     @FXML
     private DatePicker dtpBooking;
@@ -45,6 +44,8 @@ public class EmployeeMakeBookingController implements Initializable {
     private Button btnManageBooking;
     @FXML
     private Button btnCheckIn;
+    @FXML
+    private Button btnHelp;
 
     @FXML private Rectangle Table1;
     @FXML private Rectangle Table2;
@@ -54,6 +55,9 @@ public class EmployeeMakeBookingController implements Initializable {
     @FXML private Rectangle Table6;
     @FXML private Rectangle Table7;
     @FXML private Rectangle Table8;
+    @FXML private Rectangle Table9;
+    @FXML private Rectangle Table10;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources)
@@ -91,7 +95,6 @@ public class EmployeeMakeBookingController implements Initializable {
 
     public void setUp() throws SQLException
     {
-        // String condition = UserHolder.getInstance().getCondition();
 
         LocalDate date = dtpBooking.getValue();
         if(lcm.conditionExists(date))
@@ -101,6 +104,8 @@ public class EmployeeMakeBookingController implements Initializable {
             ArrayList<Booking> bookings = ebModel.getBookings(date);
             if(lockdownCondition.equals("Social Distancing"))
             {
+                lblLockdown.setText(lockdownCondition);
+
                 if(bookings.isEmpty())
                 {
                     Table1.setFill(socialDistance);
@@ -111,6 +116,8 @@ public class EmployeeMakeBookingController implements Initializable {
                     Table6.setFill(emptySeat);
                     Table7.setFill(socialDistance);
                     Table8.setFill(emptySeat);
+                    Table9.setFill(socialDistance);
+                    Table10.setFill(emptySeat);
                 }
                 else
                 {
@@ -120,6 +127,8 @@ public class EmployeeMakeBookingController implements Initializable {
             }
             else if(lockdownCondition.equals("Full Lockdown"))
             {
+                lblLockdown.setText(lockdownCondition);
+
                 Table1.setFill(totalLock);
                 Table2.setFill(totalLock);
                 Table3.setFill(totalLock);
@@ -128,23 +137,53 @@ public class EmployeeMakeBookingController implements Initializable {
                 Table6.setFill(totalLock);
                 Table7.setFill(totalLock);
                 Table8.setFill(totalLock);
+                Table9.setFill(totalLock);
+                Table10.setFill(totalLock);
             }
             else
             {
+                lblLockdown.setText(lockdownCondition);
+
                 setTables(date);
             }
-
 
         }
         // if no condition default to what we had
         else
         {
+
+            lblLockdown.setText("No Restrictions");
             setTables(date);
         }
 
+        setBookingManagement();
 
+    }
 
+    public void setTables(LocalDate date) throws SQLException {
+        ArrayList<Booking> bookings = ebModel.getBookings(date);
+        // System.out.println( "setTables method : " + date);
+        //Sets Up all tables
+        if (bookings.isEmpty())
+        {
+            Table1.setFill(emptySeat);
+            Table2.setFill(emptySeat);
+            Table3.setFill(emptySeat);
+            Table4.setFill(emptySeat);
+            Table5.setFill(emptySeat);
+            Table6.setFill(emptySeat);
+            Table7.setFill(emptySeat);
+            Table8.setFill(emptySeat);
+            Table9.setFill(emptySeat);
+            Table10.setFill(emptySeat);
+        }
+        else
+        {
+            assignTables(bookings, "No Restriction");
+        }
+    }
 
+    public void setBookingManagement() throws SQLException {
         user = UserHolder.getInstance().getUser();
 
         // Managing the delete selection
@@ -174,20 +213,21 @@ public class EmployeeMakeBookingController implements Initializable {
             }
 
             //TODO: check these conditions later
-            else if (compareValue < 0)
-            {
-                System.out.println("Today is earlier than Cutoff Data");
-                System.out.println("booking date : " + bookingDate);
-                System.out.println("cutoff date : "  + cutOffDate);
-                System.out.println("today: " + today);
-            }
-            else
-            {
-                System.out.println("both dates are equal");
-                System.out.println("booking date : " + bookingDate);
-                System.out.println("cutoff date : "  + cutOffDate);
-                System.out.println("today: " + today);
-            }
+
+            // else if (compareValue < 0)
+            // {
+            //     System.out.println("Today is earlier than Cutoff Data");
+            //     System.out.println("booking date : " + bookingDate);
+            //     System.out.println("cutoff date : "  + cutOffDate);
+            //     System.out.println("today: " + today);
+            // }
+            // else
+            // {
+            //     System.out.println("both dates are equal");
+            //     System.out.println("booking date : " + bookingDate);
+            //     System.out.println("cutoff date : "  + cutOffDate);
+            //     System.out.println("today: " + today);
+            // }
 
             //allowing check in
             int compareCheckIn = today.compareTo(bookingDate);
@@ -200,29 +240,6 @@ public class EmployeeMakeBookingController implements Initializable {
             lblCurrentBooking.setText("No booking to manage!");
             btnCheckIn.setVisible(false);
             btnManageBooking.setVisible(false);
-        }
-
-    }
-
-    public void setTables(LocalDate date) throws SQLException {
-        ArrayList<Booking> bookings = ebModel.getBookings(date);
-        // System.out.println( "setTables method : " + date);
-        //Sets Up all tables
-
-        if (bookings.isEmpty())
-        {
-            Table1.setFill(emptySeat);
-            Table2.setFill(emptySeat);
-            Table3.setFill(emptySeat);
-            Table4.setFill(emptySeat);
-            Table5.setFill(emptySeat);
-            Table6.setFill(emptySeat);
-            Table7.setFill(emptySeat);
-            Table8.setFill(emptySeat);
-        }
-        else
-        {
-            assignTables(bookings, "No Restriction");
         }
     }
 
@@ -237,6 +254,8 @@ public class EmployeeMakeBookingController implements Initializable {
         tables.add(Table6);
         tables.add(Table7);
         tables.add(Table8);
+        tables.add(Table9);
+        tables.add(Table10);
 
         for(int i = 0; i < tables.size(); i++)
         {
@@ -356,12 +375,24 @@ public class EmployeeMakeBookingController implements Initializable {
     public void checkIn(ActionEvent event) throws IOException
     {
         Util.popButtonUpWindow("../View/employeeCheckIn.fxml",btnCheckIn);
+        try {
+            setUp();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     //Move back to previous page
     public void previousPage(ActionEvent event) throws IOException
     {
         Util.sceneSwitcher("../View/employeeDashboard.fxml", Util.getStage(event));
+    }
+
+    public void help() throws IOException
+    {
+        Util.popButtonUpWindow("../View/employeeBookingHelp.fxml", btnHelp);
     }
 
 }

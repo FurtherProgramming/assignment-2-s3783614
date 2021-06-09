@@ -57,7 +57,7 @@ public class EmployeeManageBookingController implements Initializable {
     public void deleteBooking(ActionEvent event)
     {
         user = UserHolder.getInstance().getUser();
-        if(Util.alertConfirmation())
+        if(Util.alertConfirmation("Are you sure you want to delete your booking?"))
         {
             try
             {
