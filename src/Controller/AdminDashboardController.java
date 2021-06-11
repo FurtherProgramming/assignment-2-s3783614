@@ -39,15 +39,15 @@ public class AdminDashboardController implements Initializable
         Util.popButtonUpWindow("../View/adminLockdownCondition.fxml", btnLockdown);
 
     }
-
+    //Switches scenes to manage account
     public void manageAdminAccount(ActionEvent event) throws IOException{
         Util.sceneSwitcher("../View/secretQuestionPage.fxml", Util.getStage(event));
     }
-
+    //switches scenes to manage employee
     public void manageEmployee(ActionEvent event) throws IOException{
         Util.sceneSwitcher("../View/adminManageEmployees.fxml", Util.getStage(event));
     }
-
+    //switches scenes to manage booking
     public void manageBooking(ActionEvent event) throws IOException
     {
         Util.sceneSwitcher("../View/adminManageBooking.fxml", Util.getStage(event));

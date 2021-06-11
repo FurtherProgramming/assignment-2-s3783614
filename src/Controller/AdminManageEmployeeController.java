@@ -73,16 +73,19 @@ public class AdminManageEmployeeController implements Initializable {
         }
         else
         {
+            //gets empID from table view
             int empId = tblEmployees.getSelectionModel().getSelectedItem().getEmpId();
             String status = "Active";
-
+            //checks if the status is equal
             if(tblEmployees.getSelectionModel().getSelectedItem().getStatus().equals(status))
             {
                 Util.alertError("Employee is already Active!");
             }
             else if(Util.alertConfirmation("Are you sure?"))
             {
-                try {
+                try
+                {
+                    //Updates status of emp
                     manageEmpsModel.updateStatus(status,empId);
                     fillTable();
                 }

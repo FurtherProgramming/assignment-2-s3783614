@@ -51,13 +51,14 @@ public class AdminLockdownController implements Initializable
             }
         );
     }
-
+    //Sets the lockdown conditions
     public void setLockdown()
     {
         String status = cBoxType.getValue();
         LocalDate restrictionDate = dtpLockdownDate.getValue();
         try
         {
+            //check for any exsistent condition
             if(lcm.conditionExists(restrictionDate))
             {
                 if(Util.alertConfirmation("Updating conditions might delete bookings!"))
@@ -65,6 +66,7 @@ public class AdminLockdownController implements Initializable
                     lcm.updateCondition(restrictionDate,status);
                     if(!status.equals("No Restriction"))
                     {
+                        //deletes booking on day the new restriction is set
                         lcm.deleteBookings(restrictionDate);
                     }
                     Util.alertSuccessPopUp("Restriction successfully Updated!", btnConfirm);
@@ -72,6 +74,7 @@ public class AdminLockdownController implements Initializable
             }
             else
             {
+                //Confirmation alert message
                 if(Util.alertConfirmation("Updating conditions might delete bookings!"))
                 {
                     if(lcm.newCondition(status,restrictionDate))

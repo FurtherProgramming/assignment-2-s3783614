@@ -49,6 +49,7 @@ public class EmployeeManagePassword implements Initializable {
             {
                 try
                 {
+                    //calls method to delete change password
                     udModel.changePassword(newPass,userName);
                     udModel.updateUser(userName);
                     Util.alertSuccess("Password Updated Successfully!");

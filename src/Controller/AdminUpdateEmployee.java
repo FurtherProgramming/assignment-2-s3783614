@@ -33,7 +33,7 @@ public class AdminUpdateEmployee implements Initializable {
     @FXML private TextField txtSecAnswer;
     @FXML private TextField txtConfirmSecPassword;
     @FXML private Button btnUpdate;
-
+    //sets list to values for combo box
     ObservableList<String> qList = FXCollections.observableArrayList("What was your first pet?",
                                                                             "What city did your parents meet?",
                                                                             "What was your first job?",
@@ -72,6 +72,7 @@ public class AdminUpdateEmployee implements Initializable {
 
     public void updateEmployee()
     {
+        //fills fields on the fxml
         String firstName = txtFirstName.getText();
         String lastName = txtLastName.getText();
         String username = txtUsername.getText();
@@ -79,7 +80,7 @@ public class AdminUpdateEmployee implements Initializable {
         String secretQuestion = cboxSecretQuestion.getValue();
         String secretAnswer = txtSecAnswer.getText();
         int empId = UserHolder.getInstance().getEmpId();
-
+        //checks for empty fields
         if(firstName.equals("") || lastName.equals("") || password.equals("") ||
                 (cboxSecretQuestion.getValue() == null) || secretAnswer.equals(""))
         {
@@ -88,6 +89,7 @@ public class AdminUpdateEmployee implements Initializable {
         else
         {
             try {
+                //check for username
                 if(registrationModel.usernameExists(username) && !username.equals(user.getUsername()))
                 {
                     Util.alertError("Username is already taken!");

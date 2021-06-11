@@ -34,12 +34,10 @@ public class EmployeeManageBookingController implements Initializable {
     public void initialize(URL location, ResourceBundle resources)
     {
         user = UserHolder.getInstance().getUser();
-        // txtName.setText(user.getFirstName());
         Booking booking;
         try
         {
             booking = ebModel.getBookingDetails(user.getUsername());
-            System.out.println(booking.getEmpUsername());
             txtName.setText(booking.getEmpUsername());
             String date = booking.getDate().toString();
             txtDate.setText(date);
@@ -54,9 +52,10 @@ public class EmployeeManageBookingController implements Initializable {
     }
 
     // To delete booking
-    public void deleteBooking(ActionEvent event)
+    public void deleteBooking()
     {
         user = UserHolder.getInstance().getUser();
+        //confirmation for deletion of booking
         if(Util.alertConfirmation("Are you sure you want to delete your booking?"))
         {
             try

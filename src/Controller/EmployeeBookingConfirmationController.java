@@ -53,6 +53,7 @@ public class EmployeeBookingConfirmationController implements Initializable {
         LocalDate date = UserHolder.getInstance().getDate();
 
         try {
+            //adds booking if employee confirms
             if(ebModel.addBooking(username, tableNo, date))
             {
                 Util.alertSuccessPopUp("Booking successful!", btnConfirm);

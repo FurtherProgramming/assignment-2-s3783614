@@ -221,6 +221,7 @@ public class EmployeeMakeBookingController implements Initializable {
 
     public void assignTables(ArrayList<Booking> booking, String lockdownStatus)
     {
+        //Adds all tables to array list
         ArrayList<Rectangle> tables = new ArrayList<>();
         tables.add(Table1);
         tables.add(Table2);
@@ -232,13 +233,13 @@ public class EmployeeMakeBookingController implements Initializable {
         tables.add(Table8);
         tables.add(Table9);
         tables.add(Table10);
-
+        //iteraties thru the tables to add the colours to the tables
         for(int i = 0; i < tables.size(); i++)
         {
             if(lockdownStatus.equals("Social Distancing"))
             {
                 tables.get(i).setFill(emptySeat);
-
+                //check for covid conditions
                 if(i % 2 == 0)
                 {
                     tables.get(i).setFill(socialDistance);
@@ -248,8 +249,10 @@ public class EmployeeMakeBookingController implements Initializable {
             {
                 tables.get(i).setFill(emptySeat);
             }
+            // iteration thru the booking array list
             for (Booking value : booking)
             {
+                // assigning the colours to booked desks
                 String tableStr = tables.get(i).getId();
                 if (value.getTable().equals(tableStr))
                 {
@@ -321,7 +324,7 @@ public class EmployeeMakeBookingController implements Initializable {
 
                 UserHolder.getInstance().setTableNo(tableId);
                 UserHolder.getInstance().setDate(dtpBooking.getValue());
-
+                //opens confirmation window to book
                 Util.popUpRectangleWindow("../View/employeeBookingConfirmation.fxml", Table1);
 
                 //To reset the tables after a booking has been made

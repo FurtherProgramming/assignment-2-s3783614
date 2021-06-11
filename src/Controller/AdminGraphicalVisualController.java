@@ -24,7 +24,6 @@ public class AdminGraphicalVisualController implements Initializable {
 
     User user = new User();
     EmployeeBookingModel ebModel = new EmployeeBookingModel();
-    ManageEmpsModel manageEmpsModel = new ManageEmpsModel();
     LockdownConditionsModel lcm = new LockdownConditionsModel();
 
     private final Color emptySeat = Color.LIGHTGREEN;

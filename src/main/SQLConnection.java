@@ -1,7 +1,5 @@
 package main;
 import java.sql.*;
-//TODO:
-// EXPLAIN WHY :BASICALLY CAUSE IT CLOSES AND OPENS A NEW CONNECTION
 
 public class SQLConnection {
 private static Connection connection;
@@ -27,11 +25,5 @@ private static Connection connection;
             return null;
         }
     }
-
-    // public static Connection getConnection()
-    // {
-    //     return instance
-    // }
-
 
 }

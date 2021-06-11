@@ -45,9 +45,10 @@ public class AdminManageBookingController implements Initializable
             e.printStackTrace();
         }
     }
-
+    //fills the table
     public void fillTable() throws SQLException
     {
+        //sets the values of the table
         ObservableList<Booking> bookings;
         bookings = manageBookingModel.observableBookings();
         tblBooking.setItems(bookings);
@@ -66,6 +67,7 @@ public class AdminManageBookingController implements Initializable
 
         if(check)
         {
+            //If old booking exists this will delete any old booking before today
             manageBookingModel.deletePreviousBookings(yesterday);
         }
     }
@@ -79,10 +81,10 @@ public class AdminManageBookingController implements Initializable
         else
         {
             try {
-
+                // gets the booking date from the table view
                 LocalDate bookingDate = tblBooking.getSelectionModel().getSelectedItem().getDate();
                 LocalDate today = LocalDate.now();
-
+                //compares today to the booking date for checking whether it is acceptable to book
                 int compareDate = today.compareTo(bookingDate);
 
                 if (compareDate == 0)
@@ -91,6 +93,7 @@ public class AdminManageBookingController implements Initializable
                 }
                 else
                 {
+                    //confirms users choice to accept a request to book a tabel as this will delete the other requests
                     boolean confirm = Util.alertConfirmation("Approving this request will delete other requests to sit on the same table!");
                     if(confirm)
                     {

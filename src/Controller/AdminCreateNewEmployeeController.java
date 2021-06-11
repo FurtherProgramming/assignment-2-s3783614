@@ -53,14 +53,14 @@ public class AdminCreateNewEmployeeController implements Initializable {
         String confirmSecretAnswer = txtConfirmSecretAnswer.getText();
         String secretQuestion = cboSecretQuestion.getValue();
 
-
+        //Checks to see if any fields are empty
         if(firstName.equals("") || secondName.equals("") || username.equals("") || password.equals("") || confirmPassword.equals("") ||
                 secretAnswer.equals("") || confirmSecretAnswer.equals("") ||cboSecretQuestion.getValue() == null)
         {
             Util.alertError("Fields Cannot Be Left Empty!");
         }
         else {
-
+            //password check
             if (password.equals(confirmPassword))
             {
                 if (secretAnswer.equals(confirmSecretAnswer))
@@ -70,6 +70,7 @@ public class AdminCreateNewEmployeeController implements Initializable {
                         if (registrationModel.isRegistered(firstName, secondName, username,
                                 password, secretQuestion, secretAnswer))
                         {
+                            //
                             Util.alertSuccessPopUp("Employee Successfully Created!", btnRegister);
                         }
                     }
