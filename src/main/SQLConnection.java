@@ -5,7 +5,8 @@ public class SQLConnection {
 private static Connection connection;
     public static Connection connect(){
         try{
-
+            //Checks for established connection
+            //if connection exists then it closes the existent connection and opens  a new one
           if(connection == null)
           {
               Class.forName("org.sqlite.JDBC");
@@ -21,7 +22,7 @@ private static Connection connection;
 
         }
         catch (Exception e){
-            System.out.println(e);
+            e.printStackTrace();
             return null;
         }
     }
