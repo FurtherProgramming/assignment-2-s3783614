@@ -43,7 +43,7 @@
                   </Label>
                </children>
             </HBox>
-            <Button fx:id="btnHelp" mnemonicParsing="false" prefHeight="38.0" prefWidth="60.0" text="Help" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" />
+            <Button fx:id="btnHelp" mnemonicParsing="false" onAction="#help" prefHeight="38.0" prefWidth="60.0" text="Help" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" />
          </children>
          <padding>
             <Insets left="25.0" />

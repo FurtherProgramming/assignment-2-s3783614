@@ -69,13 +69,11 @@ public class EmployeeManageSecretQAController implements Initializable {
 
         if(cboxSecQuest.getValue() == null || txtSecAnswer.getText().equals("") || txtConfirmSecAnswer.getText().equals(""))
         {
-            // lblSecQuest.setText("Please pick a new secret question!");
             Util.alertError("Fields Cannot Be Left Empty!");
-
         }
         else
         {
-            if (answer.equals(confirmAnswer) /*&& cboxSecQuest.getValue() != null*/) {
+            if (answer.equals(confirmAnswer)) {
                 try {
                     udModel.changeSecAnswer(confirmAnswer, username);
                     udModel.changeSecQuestion(newQuestion, username);

@@ -22,8 +22,6 @@ public class ForgotPasswordP3Controller implements Initializable {
     ForgotPasswordModel fpmodel = new ForgotPasswordModel();
 
     @FXML
-    private Label lblChecker;
-    @FXML
     private Label lblWelcomeUser;
     @FXML
     private TextField txtNewPass;
@@ -37,7 +35,7 @@ public class ForgotPasswordP3Controller implements Initializable {
         String name = user.getFirstName();
         lblWelcomeUser.setText("Hello " +
                 name.substring(0,1).toUpperCase() + name.substring(1).toLowerCase());
-        lblChecker.setText("");
+
     }
 
     public void changePassword(ActionEvent event) throws IOException {
@@ -65,8 +63,6 @@ public class ForgotPasswordP3Controller implements Initializable {
             }
             else
             {
-                // lblChecker.setTextFill(Color.RED);
-                // lblChecker.setText("Passwords Do Not Match!");
                 Util.alertError("Passwords Do Not Match!");
             }
         }

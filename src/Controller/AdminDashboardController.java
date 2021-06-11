@@ -17,12 +17,9 @@ public class AdminDashboardController implements Initializable
 {
     User user = new User();
 
-    @FXML
-    private Label lblWelcome;
-    @FXML
-    private Button btnLockdown;
-    @FXML
-    private Button btnVisual;
+    @FXML private Label lblWelcome;
+    @FXML private Button btnLockdown;
+    @FXML private Button btnVisual;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -38,7 +35,7 @@ public class AdminDashboardController implements Initializable
         Util.sceneSwitcher("../View/loginPage.fxml", Util.getStage(event));
     }
 
-    public void lockdownConditions(ActionEvent event) throws IOException {
+    public void lockdownConditions() throws IOException {
         Util.popButtonUpWindow("../View/adminLockdownCondition.fxml", btnLockdown);
 
     }
@@ -56,7 +53,7 @@ public class AdminDashboardController implements Initializable
         Util.sceneSwitcher("../View/adminManageBooking.fxml", Util.getStage(event));
     }
 
-    public void generateCSV(ActionEvent event) throws IOException
+    public void generateCSV() throws IOException
     {
         Util.popButtonUpWindow("../View/adminGenerateCSV.fxml", btnLockdown);
     }

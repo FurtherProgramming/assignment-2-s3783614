@@ -183,6 +183,8 @@ public class ManageBookingModel {
     //METHOD TO CHECK IF THERE ARE ANY BOOKINGS ON THAT PARTICULAR DATE
     public boolean bookingsExistsOnDate(LocalDate date) throws SQLException
     {
+        connection = SQLConnection.connect();
+
         String dateStr = date.toString();
         boolean exists = false;
         PreparedStatement preparedStatement = null;
@@ -191,6 +193,7 @@ public class ManageBookingModel {
         String query = "SELECT * FROM Booking WHERE date = ?";
         try
         {
+            assert connection != null;
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1,dateStr);
             resultSet = preparedStatement.executeQuery();
@@ -208,6 +211,8 @@ public class ManageBookingModel {
         }
         finally
         {
+            assert connection != null;
+            connection.close();
             assert preparedStatement != null;
             preparedStatement.close();
             assert resultSet != null;

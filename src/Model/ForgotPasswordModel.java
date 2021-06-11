@@ -82,7 +82,5 @@ public class ForgotPasswordModel {
         return doesExist;
     }
 
-    //TODO
-    //user validation methods
 
 }

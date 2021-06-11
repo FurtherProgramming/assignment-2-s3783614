@@ -24,7 +24,6 @@ public class EmployeeManageAccountController implements Initializable {
         UserHolder holder = UserHolder.getInstance();
         user = holder.getUser();
         String name = user.getFirstName();
-        // lblWelcomeUser.setText(name);
         lblWelcomeUser.setText("Hello " +
                 name.substring(0,1).toUpperCase() + name.substring(1).toLowerCase());
     }
@@ -54,16 +53,10 @@ public class EmployeeManageAccountController implements Initializable {
         if(userType.equals("User"))
         {
             Util.sceneSwitcher("../View/employeeDashboard.fxml", Util.getStage(event));
-            // Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            // Parent root = FXMLLoader.load(getClass().getResource("../View/loginPage.fxml"));
-            // Scene scene = new Scene(root);
-            // stage.setScene(scene);
-            // stage.show();
         }
         else
         {
             Util.sceneSwitcher("../View/adminDashboard.fxml", Util.getStage(event));
-
         }
     }
 

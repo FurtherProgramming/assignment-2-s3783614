@@ -19,8 +19,7 @@ public class ForgotPasswordP2Controller implements Initializable
 
     @FXML
     private Label lblSecretQ;
-    @FXML
-    private Label lblStatus;
+
     @FXML
     private TextField txtAnswer;
 
@@ -30,11 +29,8 @@ public class ForgotPasswordP2Controller implements Initializable
         user = holder.getUser();
         String secretQuestion = user.getSecQuestion();
 
-        System.out.println(secretQuestion);
-        System.out.println(user.getSecAnswer());
-
         lblSecretQ.setText(secretQuestion);
-        lblStatus.setText("");
+
     }
 
     public void correctAnswer(ActionEvent event) throws IOException {
@@ -55,8 +51,6 @@ public class ForgotPasswordP2Controller implements Initializable
             }
             else
             {
-                // lblStatus.setTextFill(Color.RED);
-                // lblStatus.setText("Incorrect Answer!");
                 Util.alertError("Incorrect Answer!");
             }
         }

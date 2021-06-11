@@ -18,7 +18,6 @@ public class UpdateDetailsModel {
     }
 
     public void changeFname(String fName, String user) throws SQLException {
-        //TODO: update the user details
         PreparedStatement preparedStatement = null;
         String query = "UPDATE Employee SET first_name = ? WHERE username = ?;";
         try

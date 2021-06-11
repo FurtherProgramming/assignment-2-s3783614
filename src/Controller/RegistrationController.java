@@ -8,7 +8,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import main.Util;
 
@@ -20,28 +19,14 @@ public class RegistrationController implements Initializable
 {
     RegistrationModel registrationModel = new RegistrationModel();
 
-    @FXML
-    private TextField txtFirstName;
-    @FXML
-    private TextField txtSecondName;
-    @FXML
-    private TextField txtRegoUsername;
-    @FXML
-    private TextField txtRegoPassword;
-    @FXML
-    private TextField txtRegoConfirmPassword;
-    @FXML
-    private TextField txtSecretAnswer;
-    @FXML
-    private TextField txtConfirmSecretAnswer;
-    @FXML
-    private Label lblStatus;
-    @FXML
-    private Label lblPasswordStatus;
-    @FXML
-    private Label lblSecretPassStatus;
-    @FXML
-    private ComboBox<String> cboSecretQuestion;
+    @FXML private TextField txtFirstName;
+    @FXML private TextField txtSecondName;
+    @FXML private TextField txtRegoUsername;
+    @FXML private TextField txtRegoPassword;
+    @FXML private TextField txtRegoConfirmPassword;
+    @FXML private TextField txtSecretAnswer;
+    @FXML private TextField txtConfirmSecretAnswer;
+    @FXML private ComboBox<String> cboSecretQuestion;
 
     ObservableList<String> qList = FXCollections.observableArrayList("What was your first pet?",
                                                                             "What city did your parents meet?",
@@ -54,7 +39,6 @@ public class RegistrationController implements Initializable
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
-
         cboSecretQuestion.setItems(qList);
     }
 
@@ -86,7 +70,6 @@ public class RegistrationController implements Initializable
                         if (!registrationModel.usernameExists(username))
                         {
 
-                            // System.out.println(!registrationModel.usernameExists(username));
                             if (registrationModel.isRegistered(firstName, secondName, username,
                                     password, secretQuestion, secretAnswer))
                             {
@@ -119,7 +102,4 @@ public class RegistrationController implements Initializable
     {
         Util.sceneSwitcher("../View/loginPage.fxml", Util.getStage(event));
     }
-
-
-
 }

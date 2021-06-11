@@ -4,9 +4,7 @@ import Model.UpdateDetailsModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.paint.Color;
 import main.User;
 import main.UserHolder;
 import main.Util;
@@ -21,8 +19,6 @@ public class EmployeeManagePassword implements Initializable {
     UpdateDetailsModel udModel = new UpdateDetailsModel();
 
     @FXML
-    private Label lblStatus;
-    @FXML
     private TextField txtNewPass;
     @FXML
     private TextField txtConfirmNewPass;
@@ -30,7 +26,7 @@ public class EmployeeManagePassword implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        lblStatus.setText("");
+
     }
 
     public void updatePassword(ActionEvent event) throws IOException
@@ -66,8 +62,6 @@ public class EmployeeManagePassword implements Initializable {
             }
             else
             {
-                // lblStatus.setTextFill(Color.RED);
-                // lblStatus.setText("Passwords, do not match!");
                 Util.alertError("Passwords, do not match!");
             }
         }

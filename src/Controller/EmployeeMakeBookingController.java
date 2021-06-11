@@ -32,20 +32,15 @@ public class EmployeeMakeBookingController implements Initializable {
     private final Color socialDistance = Color.DARKORANGE;
     private final Color totalLock = Color.CRIMSON;
 
-    @FXML
-    private DatePicker dtpBooking;
-    @FXML
-    private Label lblWelcome;
-    @FXML
-    private Label lblCurrentBooking;
-    @FXML
-    private Label lblLockdown;
-    @FXML
-    private Button btnManageBooking;
-    @FXML
-    private Button btnCheckIn;
-    @FXML
-    private Button btnHelp;
+    @FXML private DatePicker dtpBooking;
+    @FXML private Label lblWelcome;
+    @FXML private Label lblCurrentBooking;
+    @FXML private Label lblLockdown;
+    @FXML private Label lblReservation;
+    @FXML private Label lblBookingStatus;
+    @FXML private Button btnManageBooking;
+    @FXML private Button btnCheckIn;
+    @FXML private Button btnHelp;
 
     @FXML private Rectangle Table1;
     @FXML private Rectangle Table2;
@@ -67,20 +62,17 @@ public class EmployeeMakeBookingController implements Initializable {
                             " which table would you like to book?");
         dtpBooking.setValue(LocalDate.now().plusDays(3));
 
-
-        //TODO: explain
-
-        // dtpBooking.setDayCellFactory(d ->
-        //             new DateCell()
-        //             {
-        //                 @Override
-        //                 public void updateItem(LocalDate item, boolean empty)
-        //                 {
-        //                     super.updateItem(item, empty);
-        //                     setDisable(item.isBefore(LocalDate.now()));
-        //                 }
-        //             }
-        //         );
+        dtpBooking.setDayCellFactory(d ->
+                new DateCell()
+                {
+                    @Override
+                    public void updateItem(LocalDate item, boolean empty)
+                    {
+                        super.updateItem(item, empty);
+                        setDisable(item.isBefore(LocalDate.now()));
+                    }
+                }
+            );
 
         try
         {
@@ -162,7 +154,7 @@ public class EmployeeMakeBookingController implements Initializable {
 
     public void setTables(LocalDate date) throws SQLException {
         ArrayList<Booking> bookings = ebModel.getBookings(date);
-        // System.out.println( "setTables method : " + date);
+
         //Sets Up all tables
         if (bookings.isEmpty())
         {
@@ -193,6 +185,8 @@ public class EmployeeMakeBookingController implements Initializable {
             lblCurrentBooking.setText("You have already have a booking");
 
             Booking booking = ebModel.getBookingDetails(user.getUsername());
+            lblBookingStatus.setText(booking.getStatus());
+            // " Booking Status: " + booking.getStatus()
 
             LocalDate bookingDate = booking.getDate();
             LocalDate cutOffDate = bookingDate.minusDays(2);
@@ -201,45 +195,27 @@ public class EmployeeMakeBookingController implements Initializable {
 
             if(compareValue > 0)
             {
-                //TODO: SPLIT INTO 2 LATER
-                lblCurrentBooking.setText( "Current booking: " + bookingDate +
-                        " Booking Status: " + booking.getStatus());
+                lblCurrentBooking.setText("Current booking: " + bookingDate);
                 btnManageBooking.setVisible(false);
-
-                System.out.println("Today is later than Cutoff Data");
-                System.out.println("booking date : " + bookingDate);
-                System.out.println("cutoff date : "  + cutOffDate);
-                System.out.println("today: " + today);
             }
-
-            //TODO: check these conditions later
-
-            // else if (compareValue < 0)
-            // {
-            //     System.out.println("Today is earlier than Cutoff Data");
-            //     System.out.println("booking date : " + bookingDate);
-            //     System.out.println("cutoff date : "  + cutOffDate);
-            //     System.out.println("today: " + today);
-            // }
-            // else
-            // {
-            //     System.out.println("both dates are equal");
-            //     System.out.println("booking date : " + bookingDate);
-            //     System.out.println("cutoff date : "  + cutOffDate);
-            //     System.out.println("today: " + today);
-            // }
 
             //allowing check in
             int compareCheckIn = today.compareTo(bookingDate);
             if(compareCheckIn != 0 || (booking.getStatus().equals("Pending")) || booking.getReservation().equals("In")){
                 btnCheckIn.setVisible(false);
             }
+            if(booking.getReservation().equals("In"))
+            {
+                lblReservation.setText("Checked In");
+            }
+
         }
         else
         {
             lblCurrentBooking.setText("No booking to manage!");
             btnCheckIn.setVisible(false);
             btnManageBooking.setVisible(false);
+            lblBookingStatus.setText("-");
         }
     }
 
@@ -279,12 +255,10 @@ public class EmployeeMakeBookingController implements Initializable {
                 {
                     if(value.getStatus().equals("Pending"))
                     {
-                        System.out.println(tableStr + " : pending");
                         tables.get(i).setFill(pendingSeat);
                     }
                     else if(value.getStatus().equals("Approved"))
                     {
-                        System.out.println(tableStr + " : booked");
                         tables.get(i).setFill(bookedSeat);
                     }
                 }
@@ -293,7 +267,7 @@ public class EmployeeMakeBookingController implements Initializable {
     }
 
     //Employee delete their own bookings
-    public void manageBooking(ActionEvent event) throws IOException
+    public void manageBooking() throws IOException
     {
         user = UserHolder.getInstance().getUser();
         try
@@ -312,20 +286,13 @@ public class EmployeeMakeBookingController implements Initializable {
         {
             e.printStackTrace();
         }
-        // Util.sceneSwitcher("../View/employeeManageBooking.fxml",Util.getStage(event));
     }
 
-    //TODO: set alert box for booking when there is a pending status on the table
     public void selectTable(MouseEvent event) throws IOException
     {
         //Grabs the details of the rectangle that gets clicked
         Rectangle rectangleClicked = (Rectangle) event.getSource();
         user = UserHolder.getInstance().getUser();
-        if(user.getPreviousTable() == null)
-        {
-            System.out.println("previous table: " + user.getPreviousTable());
-
-        }
 
         try {
 
@@ -360,7 +327,6 @@ public class EmployeeMakeBookingController implements Initializable {
                 //To reset the tables after a booking has been made
                 setUp();
 
-
             }
         }
         catch(SQLException e)
@@ -371,8 +337,7 @@ public class EmployeeMakeBookingController implements Initializable {
 
     }
 
-
-    public void checkIn(ActionEvent event) throws IOException
+    public void checkIn() throws IOException
     {
         Util.popButtonUpWindow("../View/employeeCheckIn.fxml",btnCheckIn);
         try {

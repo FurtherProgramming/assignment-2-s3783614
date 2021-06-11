@@ -22,21 +22,17 @@ import java.util.ResourceBundle;
 
 public class ForgotPasswordController implements Initializable
 {
-    // LoginModel loginModel = new LoginModel();
-    // RegistrationModel registrationModel = new RegistrationModel();
     ForgotPasswordModel forgotPasswordModel = new ForgotPasswordModel();
 
     @FXML
     private TextField txtUsername;
-    @FXML
-    private Label lblUsernameStatus;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
-        lblUsernameStatus.setText("");
-    }
 
+    }
 
     public void userNameValidation(ActionEvent event) throws IOException {
         String username = txtUsername.getText();
@@ -53,8 +49,6 @@ public class ForgotPasswordController implements Initializable
             }
             else
             {
-                // lblUsernameStatus.setText("This username does not exist!");
-                // lblUsernameStatus.setTextFill(Color.RED);
                 Util.alertError("This username does not exist!");
             }
 
@@ -64,6 +58,5 @@ public class ForgotPasswordController implements Initializable
     public void previousPage(ActionEvent event) throws IOException {
         Util.sceneSwitcher("../View/loginPage.fxml", Util.getStage(event));
     }
-
 
 }

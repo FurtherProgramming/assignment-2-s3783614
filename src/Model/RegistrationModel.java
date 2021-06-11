@@ -6,8 +6,6 @@ import java.sql.*;
 
 public class RegistrationModel {
 
-    // private PreparedStatement preparedStatement = null;
-
     Connection connection;
 
     public RegistrationModel()
@@ -18,16 +16,12 @@ public class RegistrationModel {
     public boolean isRegistered(String firstName, String lastName, String  username,
                                 String password, String secretQuestion, String secretAnswer)
     {
-
-        // System.out.println("spot 1");
-
         String queryString;
         queryString = "INSERT INTO Employee(first_name, last_name, username, password, secret_question, secret_answer)" +
                                                                                                 " VALUES(?,?,?,?,?,?)";
 
         try(PreparedStatement preparedStatement = connection.prepareStatement(queryString))
         {
-            System.out.println(preparedStatement);
             preparedStatement.setString(1, firstName);
             preparedStatement.setString(2, lastName);
             preparedStatement.setString(3,username);
@@ -41,7 +35,6 @@ public class RegistrationModel {
 
         catch (SQLException e)
         {
-            // System.out.println("sql error!");
             e.printStackTrace();
             return false;
         }
@@ -57,15 +50,12 @@ public class RegistrationModel {
         String query = "SELECT * FROM Employee WHERE username = ?";
         boolean doesExist = false;
 
-
         try
         {
             assert connection != null;
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, username);
             resultSet = preparedStatement.executeQuery();
-            // System.out.println(resultSet.next());
-            // return resultSet.next();
             String usernameCheck;
             if(resultSet.next())
             {
@@ -75,15 +65,12 @@ public class RegistrationModel {
                     doesExist = true;
                 }
             }
-
-
         }
         catch(SQLException e)
         {
             e.printStackTrace();
 
         }
-        System.out.println(doesExist);
         return doesExist;
     }
 

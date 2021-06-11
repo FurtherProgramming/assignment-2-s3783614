@@ -7,7 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
+
 import javafx.scene.control.TextField;
 import main.Util;
 
@@ -18,30 +18,15 @@ public class AdminCreateNewEmployeeController implements Initializable {
 
     RegistrationModel registrationModel = new RegistrationModel();
 
-    @FXML
-    private TextField txtFirstName;
-    @FXML
-    private TextField txtSecondName;
-    @FXML
-    private TextField txtRegoUsername;
-    @FXML
-    private TextField txtRegoPassword;
-    @FXML
-    private TextField txtRegoConfirmPassword;
-    @FXML
-    private TextField txtSecretAnswer;
-    @FXML
-    private TextField txtConfirmSecretAnswer;
-    @FXML
-    private Label lblStatus;
-    @FXML
-    private Label lblPasswordStatus;
-    @FXML
-    private Label lblSecretPassStatus;
-    @FXML
-    private ComboBox<String> cboSecretQuestion;
-    @FXML
-    private Button btnRegister;
+    @FXML private TextField txtFirstName;
+    @FXML private TextField txtSecondName;
+    @FXML private TextField txtRegoUsername;
+    @FXML private TextField txtRegoPassword;
+    @FXML private TextField txtRegoConfirmPassword;
+    @FXML private TextField txtSecretAnswer;
+    @FXML private TextField txtConfirmSecretAnswer;
+    @FXML private ComboBox<String> cboSecretQuestion;
+    @FXML private Button btnRegister;
 
     ObservableList<String> qList = FXCollections.observableArrayList("What was your first pet?",
             "What city did your parents meet?",
@@ -54,10 +39,8 @@ public class AdminCreateNewEmployeeController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
-
         cboSecretQuestion.setItems(qList);
     }
-
 
     @FXML
     public void employeeCreation() {
@@ -84,8 +67,6 @@ public class AdminCreateNewEmployeeController implements Initializable {
                 {
                     if (!registrationModel.usernameExists(username))
                     {
-
-                        System.out.println(!registrationModel.usernameExists(username));
                         if (registrationModel.isRegistered(firstName, secondName, username,
                                 password, secretQuestion, secretAnswer))
                         {
@@ -94,22 +75,16 @@ public class AdminCreateNewEmployeeController implements Initializable {
                     }
                     else
                     {
-                        // lblStatus.setTextFill(Color.RED);
-                        // lblStatus.setText("This username has already been taken, try again!");
                         Util.alertError("This username has already been taken, try again!");
                     }
                 }
                 else
                 {
-                    // lblSecretPassStatus.setTextFill(Color.RED);
-                    // lblSecretPassStatus.setText("Passwords do not match!, try again!");
                     Util.alertError("Secret Passwords do not match, try again!");
                 }
             }
             else
             {
-                // lblPasswordStatus.setTextFill(Color.RED);
-                // lblPasswordStatus.setText("Passwords do not match!, try again!");
                 Util.alertError("Passwords do not match, try again!");
             }
         }

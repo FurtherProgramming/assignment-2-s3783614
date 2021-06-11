@@ -103,7 +103,7 @@ public class EmployeeBookingModel {
             assert resultSet != null;
             resultSet.close();
         }
-        System.out.println(booking.getEmpUsername());
+
         return booking;
     }
 

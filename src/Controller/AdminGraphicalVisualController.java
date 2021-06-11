@@ -13,6 +13,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import main.*;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -37,11 +38,7 @@ public class AdminGraphicalVisualController implements Initializable {
     @FXML
     private Label lblWelcome;
     @FXML
-    private Label lblCurrentBooking;
-    @FXML
     private Label lblLockdown;
-    @FXML
-    private Button btnManageBooking;
     @FXML
     private Button btnClose;
     @FXML
@@ -145,17 +142,15 @@ public class AdminGraphicalVisualController implements Initializable {
         // if no condition default to what we had
         else
         {
-
             lblLockdown.setText("No Restrictions");
             setTables(date);
         }
-
 
     }
 
     public void setTables(LocalDate date) throws SQLException {
         ArrayList<Booking> bookings = ebModel.getBookings(date);
-        // System.out.println( "setTables method : " + date);
+
         //Sets Up all tables
         if (bookings.isEmpty())
         {
@@ -212,12 +207,10 @@ public class AdminGraphicalVisualController implements Initializable {
                 {
                     if(value.getStatus().equals("Pending"))
                     {
-                        System.out.println(tableStr + " : pending");
                         tables.get(i).setFill(pendingSeat);
                     }
                     else if(value.getStatus().equals("Approved"))
                     {
-                        System.out.println(tableStr + " : booked");
                         tables.get(i).setFill(bookedSeat);
                     }
                 }
@@ -228,5 +221,10 @@ public class AdminGraphicalVisualController implements Initializable {
     public void close()
     {
         Util.exitBtn(btnClose);
+    }
+
+    public void help() throws IOException
+    {
+        Util.popButtonUpWindow("../View/employeeBookingHelp.fxml", btnHelp);
     }
 }

@@ -24,8 +24,7 @@ public class ManageAccountEntranceController implements Initializable {
     private Label lblSecQ;
     @FXML
     private TextField txtAnswer;
-    @FXML
-    private Label lblStatus;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -35,19 +34,14 @@ public class ManageAccountEntranceController implements Initializable {
         String name = user.getFirstName();
         String secQ = user.getSecQuestion();
 
-        lblStatus.setText("");
         lblSecQ.setText(secQ);
         lblWelcomeUser.setText(name.substring(0,1).toUpperCase() + name.substring(1).toLowerCase() +
                                         " what's the answer to this?");
-        //TODO:DELETE LATER
-        String secAnswer = user.getSecAnswer();
-        System.out.println(secAnswer + " : Secret answer");
     }
 
     public void validation(ActionEvent event) throws IOException {
         String secAnswer = txtAnswer.getText();
         String userSecAnswer = user.getSecAnswer();
-        System.out.println("validating and printing the users answer: " + userSecAnswer);
 
         if(secAnswer.equals(""))
         {
@@ -61,8 +55,6 @@ public class ManageAccountEntranceController implements Initializable {
             }
             else
             {
-                // lblStatus.setTextFill(Color.RED);
-                // lblStatus.setText("Incorrect Answer Try Again!");
                 Util.alertError("Incorrect Answer Try Again!");
             }
         }
@@ -74,6 +66,7 @@ public class ManageAccountEntranceController implements Initializable {
         UserHolder holder = UserHolder.getInstance();
         user = holder.getUser();
         String userType = user.getRole();
+
         if(userType.equals("User")) {
             Util.sceneSwitcher("../View/employeeDashboard.fxml", Util.getStage(event));
         }

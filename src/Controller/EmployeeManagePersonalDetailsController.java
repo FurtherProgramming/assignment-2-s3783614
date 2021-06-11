@@ -21,15 +21,13 @@ public class EmployeeManagePersonalDetailsController implements Initializable {
     UpdateDetailsModel udModel = new UpdateDetailsModel();
 
     @FXML
-    private Label lblStatus;
-    @FXML
     private TextField txtFirstName;
     @FXML
     private TextField txtSecondName;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        lblStatus.setText("");
+
     }
 
     public void updatePersonalDetails(ActionEvent event) throws IOException
@@ -43,9 +41,6 @@ public class EmployeeManagePersonalDetailsController implements Initializable {
         String username = user.getUsername();
         if(FirstName.equals("") || SecondName.equals(""))
         {
-
-            // lblStatus.setTextFill(Color.RED);
-            // lblStatus.setText("Field cannot be left Empty");
             Util.alertError("Fields Cannot Be Left Empty!");
         }
         else
@@ -65,10 +60,5 @@ public class EmployeeManagePersonalDetailsController implements Initializable {
     public void previousPage(ActionEvent event) throws IOException
     {
         Util.sceneSwitcher("../View/employeeManageAccount.fxml", Util.getStage(event));
-        // Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        // Parent root = FXMLLoader.load(getClass().getResource("../View/loginPage.fxml"));
-        // Scene scene = new Scene(root);
-        // stage.setScene(scene);
-        // stage.show();
     }
 }

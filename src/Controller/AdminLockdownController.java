@@ -3,22 +3,15 @@ package Controller;
 import Model.LockdownConditionsModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
-import javafx.stage.Stage;
 import main.UserHolder;
 import main.Util;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -45,6 +38,7 @@ public class AdminLockdownController implements Initializable
         cBoxType.setValue(restrictionType);
         cBoxType.setItems(lockdown);
 
+        //Disables the date before today
         dtpLockdownDate.setDayCellFactory(d ->
             new DateCell()
             {
@@ -58,8 +52,6 @@ public class AdminLockdownController implements Initializable
         );
     }
 
-
-
     public void setLockdown()
     {
         String status = cBoxType.getValue();
@@ -68,7 +60,6 @@ public class AdminLockdownController implements Initializable
         {
             if(lcm.conditionExists(restrictionDate))
             {
-                // Todo: better confirmation message!
                 if(Util.alertConfirmation("Updating conditions might delete bookings!"))
                 {
                     lcm.updateCondition(restrictionDate,status);
@@ -89,7 +80,6 @@ public class AdminLockdownController implements Initializable
                         {
                             lcm.deleteBookings(restrictionDate);
                         }
-                        // lcm.deleteBookings(restrictionDate);
                         Util.alertSuccessPopUp("Restriction Successfully Created!", btnConfirm);
                     }
                 }

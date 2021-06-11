@@ -24,24 +24,15 @@ public class AdminUpdateEmployee implements Initializable {
     RegistrationModel registrationModel = new RegistrationModel();
 
     User user = new User();
-    @FXML
-    private ComboBox<String> cboxSecretQuestion;
-    @FXML
-    private TextField txtFirstName;
-    @FXML
-    private TextField txtLastName;
-    @FXML
-    private TextField txtUsername;
-    @FXML
-    private TextField txtPassword;
-    @FXML
-    private TextField txtConfirmPassword;
-    @FXML
-    private TextField txtSecAnswer;
-    @FXML
-    private TextField txtConfirmSecPassword;
-    @FXML
-    private Button btnUpdate;
+    @FXML private ComboBox<String> cboxSecretQuestion;
+    @FXML private TextField txtFirstName;
+    @FXML private TextField txtLastName;
+    @FXML private TextField txtUsername;
+    @FXML private TextField txtPassword;
+    @FXML private TextField txtConfirmPassword;
+    @FXML private TextField txtSecAnswer;
+    @FXML private TextField txtConfirmSecPassword;
+    @FXML private Button btnUpdate;
 
     ObservableList<String> qList = FXCollections.observableArrayList("What was your first pet?",
                                                                             "What city did your parents meet?",
@@ -79,7 +70,7 @@ public class AdminUpdateEmployee implements Initializable {
         txtConfirmSecPassword.setText(user.getSecAnswer());
     }
 
-    public void updateEmployee(ActionEvent event)
+    public void updateEmployee()
     {
         String firstName = txtFirstName.getText();
         String lastName = txtLastName.getText();
@@ -92,15 +83,11 @@ public class AdminUpdateEmployee implements Initializable {
         if(firstName.equals("") || lastName.equals("") || password.equals("") ||
                 (cboxSecretQuestion.getValue() == null) || secretAnswer.equals(""))
         {
-
             Util.alertError("Fields Cannot Be Left Empty!");
-            // System.out.println("No empty fields!");
         }
         else
         {
             try {
-                //TODO: USERNAME CHECK
-                //usernameExists() && username != current username
                 if(registrationModel.usernameExists(username) && !username.equals(user.getUsername()))
                 {
                     Util.alertError("Username is already taken!");
@@ -113,11 +100,9 @@ public class AdminUpdateEmployee implements Initializable {
                             Util.alertSuccessPopUp("Employee Successfully Updated!", btnUpdate);
                         } else {
                             Util.alertError("Secret answers does not match!");
-                            // System.out.println("Secret answer does not match!");
                         }
                     } else {
                         Util.alertError("Passwords does not match!");
-                        // System.out.println("Password does not match!");
                     }
                 }
             }
@@ -126,7 +111,6 @@ public class AdminUpdateEmployee implements Initializable {
                 e.printStackTrace();
             }
         }
-
-
     }
+
 }

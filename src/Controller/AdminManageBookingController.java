@@ -23,27 +23,18 @@ public class AdminManageBookingController implements Initializable
 {
     ManageBookingModel manageBookingModel = new ManageBookingModel();
 
-    @FXML
-    private Button btnApprove;
-    @FXML
-    private TableView<Booking> tblBooking;
-    @FXML
-    private TableColumn<Booking, Integer> tblBookingID;
-    @FXML
-    private TableColumn<Booking, String> tblUsername;
-    @FXML
-    private TableColumn<Booking, LocalDate> tblBookDate;
-    @FXML
-    private TableColumn<Booking, String> tblBookedTable;
-    @FXML
-    private TableColumn<Booking, String> tblStatus;
-    @FXML
-    private TableColumn<Booking, String> tblReservation;
+    @FXML private Button btnApprove;
+    @FXML private TableView<Booking> tblBooking;
+    @FXML private TableColumn<Booking, Integer> tblBookingID;
+    @FXML private TableColumn<Booking, String> tblUsername;
+    @FXML private TableColumn<Booking, LocalDate> tblBookDate;
+    @FXML private TableColumn<Booking, String> tblBookedTable;
+    @FXML private TableColumn<Booking, String> tblStatus;
+    @FXML private TableColumn<Booking, String> tblReservation;
 
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
-
         try
         {
             deleteOldBookings();
@@ -79,7 +70,7 @@ public class AdminManageBookingController implements Initializable
         }
     }
 
-    public void acceptBooking(ActionEvent event)
+    public void acceptBooking()
     {
         if(tblBooking.getSelectionModel().getSelectedItem() == null)
         {
@@ -93,30 +84,24 @@ public class AdminManageBookingController implements Initializable
                 LocalDate today = LocalDate.now();
 
                 int compareDate = today.compareTo(bookingDate);
-                //TODO: Enable later
 
-                // if (compareDate == 0)
-                // {
-                //
-                //     Util.alertError("Cannot alter booking status");
-                //     // btnApprove.setVisible(false);
-                //
-                // }
-                // else
-                // {
-                    //TODO confirmation alert -> write in message this will delete all emps with same table :)
+                if (compareDate == 0)
+                {
+                    Util.alertError("Cannot Accept booking status");
+                }
+                else
+                {
                     boolean confirm = Util.alertConfirmation("Approving this request will delete other requests to sit on the same table!");
                     if(confirm)
                     {
                         int bookingID = tblBooking.getSelectionModel().getSelectedItem().getBookingId();
-                        System.out.println("selected booking Id is: " + bookingID);
                         String bookedTable = tblBooking.getSelectionModel().getSelectedItem().getTable();
 
                         LocalDate date = tblBooking.getSelectionModel().getSelectedItem().getDate();
                         manageBookingModel.approveBooking(bookingID, "Approved");
                         manageBookingModel.deleteSameBooking(date, bookedTable, "Pending");
                         fillTable();
-                    // }
+                    }
 
                 }
             }
@@ -127,7 +112,7 @@ public class AdminManageBookingController implements Initializable
         }
     }
 
-    public void rejectBooking(ActionEvent event)
+    public void rejectBooking()
     {
         if(tblBooking.getSelectionModel().getSelectedItem() == null)
         {
@@ -137,19 +122,10 @@ public class AdminManageBookingController implements Initializable
         {
             try
             {
-                //TODO possibly delete later -> idea is cannot delete once approved
+                int bookingID = tblBooking.getSelectionModel().getSelectedItem().getBookingId();
+                manageBookingModel.rejectBookings(bookingID);
+                fillTable();
 
-                // String status = tblBooking.getSelectionModel().getSelectedItem().getStatus();
-                // if(status.equals("Approved"))
-                // {
-                //     Util.alertError("Cannot delete approved seat!");
-                // }
-                // else
-                // {
-                    int bookingID = tblBooking.getSelectionModel().getSelectedItem().getBookingId();
-                    manageBookingModel.rejectBookings(bookingID);
-                    fillTable();
-                // }
             }
             catch(SQLException e)
             {

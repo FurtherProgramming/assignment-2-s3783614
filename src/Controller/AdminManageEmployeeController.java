@@ -45,12 +45,15 @@ public class AdminManageEmployeeController implements Initializable {
         try
         {
             fillTable();
-        } catch (SQLException e) {
+        }
+        catch (SQLException e)
+        {
             e.printStackTrace();
         }
     }
 
-    public void fillTable() throws SQLException {
+    public void fillTable() throws SQLException
+    {
         ObservableList<User> employees;
             employees = manageEmpsModel.observableEmployeeList();
             tblEmployees.setItems(employees);
@@ -61,7 +64,7 @@ public class AdminManageEmployeeController implements Initializable {
             tblStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
     }
 
-    public void enableEmployee(ActionEvent event)
+    public void enableEmployee()
     {
         if(tblEmployees.getSelectionModel().getSelectedItem() == null)
         {
@@ -72,7 +75,6 @@ public class AdminManageEmployeeController implements Initializable {
         {
             int empId = tblEmployees.getSelectionModel().getSelectedItem().getEmpId();
             String status = "Active";
-            // System.out.println("BLAH");
 
             if(tblEmployees.getSelectionModel().getSelectedItem().getStatus().equals(status))
             {
@@ -81,17 +83,8 @@ public class AdminManageEmployeeController implements Initializable {
             else if(Util.alertConfirmation("Are you sure?"))
             {
                 try {
-
-                    // if(tblEmployees.getSelectionModel().getSelectedItem().getStatus().equals(status))
-                    // {
-                    //     Util.alertError("Employee is already inactive!");
-                    // }
-                    // else
-                    // {
                     manageEmpsModel.updateStatus(status,empId);
                     fillTable();
-                    // }
-
                 }
                 catch (SQLException e)
                 {
@@ -101,7 +94,7 @@ public class AdminManageEmployeeController implements Initializable {
         }
     }
 
-    public void disableEmployee(ActionEvent event)
+    public void disableEmployee()
     {
         if(tblEmployees.getSelectionModel().getSelectedItem() == null)
         {
@@ -120,17 +113,8 @@ public class AdminManageEmployeeController implements Initializable {
             else if(Util.alertConfirmation("Disabling the employee will deny them access to their account. Are you sure?"))
             {
                 try {
-
-                    // if(tblEmployees.getSelectionModel().getSelectedItem().getStatus().equals(status))
-                    // {
-                    //     Util.alertError("Employee is already inactive!");
-                    // }
-                    // else
-                    // {
                     manageEmpsModel.updateStatus(status,empId);
                     fillTable();
-                    // }
-
                 }
                 catch (SQLException e)
                 {
@@ -140,7 +124,7 @@ public class AdminManageEmployeeController implements Initializable {
         }
     }
 
-    public void deleteEmployee(ActionEvent event)
+    public void deleteEmployee()
     {
         if(tblEmployees.getSelectionModel().getSelectedItem() == null)
         {
@@ -154,7 +138,6 @@ public class AdminManageEmployeeController implements Initializable {
             try
             {
                 manageEmpsModel.deleteEmployee(empId);
-                System.out.println("EmpId : " + empId);
                 fillTable();
             }
             catch (SQLException e)

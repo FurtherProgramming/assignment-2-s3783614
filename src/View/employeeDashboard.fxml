@@ -33,9 +33,6 @@
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#previousPage" text="Back" />
-               </children>
                <padding>
                   <Insets right="25.0" />
                </padding>
@@ -59,8 +56,8 @@
                </font>
             </Label>
             <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#makeABooking" prefHeight="50.0" prefWidth="150.0" text="Make a Booking" textAlignment="CENTER" />
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="Delete a Booking" textAlignment="CENTER" />
             <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#manageAccount" prefHeight="50.0" prefWidth="150.0" text="Manage Account" textAlignment="CENTER" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#previousPage" prefHeight="50.0" prefWidth="150.0" text="Log Out" />
          </children>
       </VBox>
    </center>
